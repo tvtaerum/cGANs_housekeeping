@@ -1,16 +1,15 @@
 # cGans_with_embedding
-Lessons for training cGans with embedding
-Using work inspired by Jason Brownlee and Jeff Heaton, I demonstrate a cGAN with the following characteristics:
-  1.  automatically recover from poor initialization
-  2.  recovery from incomplete convergence
-  3.  use of non-random initialization values
+Python code for training cGans.  I demonstrate a cGAN with the following characteristics:
+  1.  a method to automatically recover from poor initialization
+  2.  ways to recover from incomplete convergence
+  3.  the use of non-random initialization values
   4.  testing source material (original pictures of faces)
-  5.  over-riding warning messages
+  5.  how to override warning messages
 
-Words of caution:
-  1.  this is not rocket science
-  2.  I do not significantly expand our knowledge of Generative Adversarial Networks
-  
 Motivation:
-In my efforts to learn Generative Adversarial Networks, I got tired of so many efforts related to GAN where the author appeared to be completing something for a class project and, with a wave of a hand, would declare something to be complete and working when, in fact, it neither worked nor was it complete.  The other were projects where the code presented was obviously wrong, in error, and had little to do with the output which was promised and illustrated.  
-  
+In my efforts to learn Generative Adversarial Networks, I got tired of so many publications about GAN where the author would present code and, with a wave of a hand, would declare it to be complete and working.  The code, as I discovered, was neither complete nor working and appeared to be in completion of class assignments.  These authors would, with considerable fanfare, present themselves as newly discovered experts in the field.  
+
+Closely related is the situation where the code is obviously wrong and could not have produced the output shown in the published results.  
+
+In contrast to those situations, I am greatly impressed with the tutorials of Jason Brownless and Jeff Heaton.  Their code works and they deliver what they promise.
+
