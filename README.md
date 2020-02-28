@@ -2,14 +2,14 @@
 Python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works and they deliver what they promise.  
 
 Using a cGAN, I provide some answers to the following questions:
-  1.  is there a way to recover from a poor initialization?
+  1.  what is one way to recover from poor learning rates or slopes
   2.  is there a way to restart a cGAN which has not completed convergence
-  3.  are there non-random initialization values that can be recommended?
+            - requirements for restarting
+  3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
-  5.  how can I override warning messages in tensorflow?
-  6.  what are recommended settings for learning rates and slopes?
-  7.  how can I use embedding when I have descriptions of pictures?
-  8.  how can I vectorize from generated face to generated face?
+  5.  how can I override warning messages from tensorflow?
+  6.  how can I use embedding when I have descriptions of pictures?
+  7.  how can I vectorize from generated face to generated face?
 
 Motivation:
 In my efforts to learn Generative Adversarial Networks, I got tired of so many publications about GAN where the author would present code and, with a wave of a hand, would declare it to be complete and working.  The code, as I discovered, was neither complete nor working and appeared to be in completion of class assignments.  These authors would, with considerable fanfare, present themselves as newly discovered experts in the field.  
