@@ -3,6 +3,7 @@
 In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  In contrast to many other projects, their code works 'out of the box' and they deliver what they promise.  
 
 #### Motivation:
+
 Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, figuring out why outcomes appear dirty or messy, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 
  Using a cGAN, I provide some partial solutions to the following questions:
@@ -16,7 +17,8 @@ Even the best tutorials can leave a person scratching their head wondering if th
   7.  how can I vectorize from generated face to generated face?
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
-There is 
+
+As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  
  
 ### 2.  is there a way to restart a cGAN whiich has not completed convergence:
 
