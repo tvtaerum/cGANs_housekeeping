@@ -22,7 +22,7 @@ I define a couple of terms which reflect my background in predictive analytics.
   4.  how important is the source material (original pictures of faces)?
   5.  how can I override warning messages from tensorflow?
   6.  how can I use embedding when I have descriptions of pictures?
-  7.  how can I vectorize from generated face to generated face?
+  7.  how can I vectorize from generated face to generated face? 
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
 
