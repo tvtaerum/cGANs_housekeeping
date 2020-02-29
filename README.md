@@ -46,7 +46,7 @@ There is a well known acronym GIGO (garbage in, garbage out), and no one is surp
 When debugging keras in tensorflow, it is occasionally not helpful to have tensorflow warning messages repeatedly occur.  Turning off the warning messages turned out, for me, to be surprisingly difficult.   
  
 ### 6.  how can I use embedding when I have descriptions of pictures?
-There circumstances where we want to insure that the predicted output has particular characteristics, such as attractive, gender specific, and high cheek bones.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and stances.  
+There circumstances where we want to insure that the predicted output has particular characteristics, such as attractive, gender specific, and high cheek bones.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
  
 ### 7.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  
