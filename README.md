@@ -15,9 +15,9 @@ Even the best tutorials can leave a person scratching their head wondering if th
   7.  how can I vectorize from generated face to generated face?
 
 # 1.  what is one way to recover from poor learning rates and/or slopes:
-      There is nothing
+There is nothing
 # 2.  is there a way to restart a cGAN whiich has not completed convergence:
-      There is nothing quite as upsetting as running a stream on your GPUs and having the program bomb when it is 90% of the way through.  Attempts to restart end in tragedy as there are warnings about 
+There is nothing quite as upsetting as running a stream on your GPUs and having the program bomb when it is 90% of the way through.  Attempts to restart end in tragedy as there are warnings about 
       
       a. getting rid of the ???  warning
       
