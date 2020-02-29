@@ -8,9 +8,9 @@ Even the best tutorials can leave a person scratching their head wondering if th
 
 #### Cautions:
 
-I define a couple of terms which reflect my background in predictive analytics.  
+I define a couple of terms which reflect my background in analytics.  
   1.  stream:  the moving process including input of data, algorithms used, to the output of data and its evaluation.
-  2.  convergence:  Since there are no unique solutions in GAN, convergence occurs when all possible configurations result in no changes in loss.  In some circumstances continued "convergence" can result in observable degredation of predicted images.  In some circumstances, good initialization values might be characterized by streams for which continued convergence always results in improved images.  
+  2.  convergence:  Since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  In some circumstances, good models might be characteristic of streams for which continued processing always results in improved clarity of images.  
 
 ##### The process:
 
