@@ -8,9 +8,9 @@ Even the best tutorials can leave a person scratching their head wondering if th
 
 #### Cautions:
 
-I define a couple of terms I use which reflect my background in predictive analytics.  
-  1.  stream:  the overall process
-  2.  convergence:  in GAN, there are no unique solutions, so there can not be a solution.  In some circumstances continued "convergence" can result in observable degredation of predicted images.  In some circumstances, good initialization values might be characterized by streams for which continued convergence always results in improved images.  
+I define a couple of terms which reflect my background in predictive analytics.  
+  1.  stream:  the moving process including input of data, algorithms used, to the output of data and its evaluation.
+  2.  convergence:  Since there are no unique solutions in GAN, convergence occurs when all possible configurations result in no changes in loss.  In some circumstances continued "convergence" can result in observable degredation of predicted images.  In some circumstances, good initialization values might be characterized by streams for which continued convergence always results in improved images.  
 
 ##### The process:
 
