@@ -1,20 +1,20 @@
 # cGans_with_embedding
-Python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works and they deliver what they promise.  
+Housekeeping python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works and they deliver what they promise.  
 
-Using a cGAN, I provide some answers to the following questions:
-  1.  what is one way to recover from poor learning rates or slopes
-  2.  is there a way to restart a cGAN which has not completed convergence
-            - requirements for restarting
+Motivation:
+Are you tired of publications about GAN where authors present code and, with a wave of a hand, declare it to be complete and working, when clearly it is not?  Closely related is the situation where the code is obviously wrong and could not have produced the output shown in the published results.  In contrast, I found the tutorials by Jason Brownlee and also Jeff Heaton to be particularly helpful because they adhere to the recommendations of other GAN experts and, if they don't work 'out of the box', a few minor tweeks will deliver wonderful solutions.  
+
+Occasionally, even the best tutorials can leave a person scratching their head wondering if there is a solution to a number of housekeeping issues.  Using a cGAN, I provide some answers to the following questions:
+
+  1.  is there an automated way to recover from bad starts when learning rates or slopes appear to be reasonable?
+  2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
   5.  how can I override warning messages from tensorflow?
   6.  how can I use embedding when I have descriptions of pictures?
   7.  how can I vectorize from generated face to generated face?
 
-Motivation:
-In my efforts to learn Generative Adversarial Networks, I got tired of so many publications about GAN where the author would present code and, with a wave of a hand, declare it to be complete and working.  The code, as I discovered, was neither complete nor working and appeared to be in completion of class assignments.  These authors would present themselves as newly found experts in the field having completed a class assignment.  Closely related is the situation where the code is obviously wrong and could not have produced the output shown in the published results.    
-
-In contrast, the tutorials by Jason Brownlee are particularly helpful because they adhere to the recommendations of other GAN experts and, if they don't work 'out of the box', a few minor tweeks will deliver wonderful solutions.    
+Even the best tutorials 
 
 1.  what is one way to recover from poor learning rates and/or slopes:
 
