@@ -1,12 +1,13 @@
 # cGans_with_embedding
-Housekeeping python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works and they deliver what they promise.  
+Housekeeping python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  In contrast to many other projects, their code works 'out of the box' and they deliver what they promise.  
 
 Motivation:
+Even the best tutorials can leave a person scratching their head wondering if there are ways to 
 Are you tired of publications about GAN where authors present code and, with a wave of a hand, declare it to be complete and working, when clearly it is not?  Closely related is the situation where the code is obviously wrong and could not have produced the output shown in the published results.  In contrast, I found the tutorials by Jason Brownlee and also Jeff Heaton to be particularly helpful because they adhere to the recommendations of other GAN experts and, if they don't work 'out of the box', a few minor tweeks will deliver wonderful solutions.  
 
-Occasionally, even the best tutorials can leave a person scratching their head wondering if there is a solution to a number of housekeeping issues.  Using a cGAN, I provide some answers to the following questions:
+Occasionally, even the best tutorials can leave a person scratching their head wondering if there is a solution to a number of housekeeping issues.  Using a cGAN, I provide some partial solutions to the following questions:
 
-  1.  is there an automated way to recover from bad starts when learning rates or slopes appear to be reasonable?
+  1.  is there an automated way to recover from bad starts when learning rates or slopes are reasonable?
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
