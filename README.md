@@ -29,7 +29,7 @@ Once issues with dimensions and what is trainable is resolved, there are then pr
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
-There is 
+I have found no reason to believe that normal like distributions of random values are better than, for instance, uniform distributions of random values...  We can imagine we are in a bounded 100-dimensional space and there is no strong reason for fine tuning central values as opposed to values at the upper and lower tail.   
  
 ### 4.  how important is the source material (original pictures of faces)?
 There is
