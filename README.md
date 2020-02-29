@@ -4,12 +4,12 @@ In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on t
 
 #### Motivation for housekeeping:
 
-Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, figuring out why outcomes appear dirty or messy, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
+Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no obvious way for figuring out why outcomes appear dirty or not clear, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 
 #### Cautions:
 
 I define a couple of terms which reflect my background in analytics.  
-  1.  stream:  the moving process including input of data, algorithms used, to the output of data and its evaluation.
+  1.  stream:  the moving process including input of data, algorithms used, and the output of data and its evaluation.
   2.  convergence:  Since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  In some circumstances, good models might be characteristic of streams for which continued processing always results in improved clarity of images.  
 
 ##### The process:
@@ -37,7 +37,7 @@ Once issues with dimensions and what is trainable is resolved, there are then pr
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
-I have found no reason to believe that normal like distributions of random values are better than, for instance, uniform distributions of random values...  We can imagine we are in a bounded 100-dimensional space and there is no strong reason for fine tuning central values as opposed to values at the upper and lower tail.   
+I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  I did a little bit of work on that issue and found that leptokurtic distributions were poorest in generating good images.  The virtue of normal-like distributions is the values further away from the centroid provide more information than those close to the centroid but do we really believe this when generating images?  For most of the results discussed here, we are in a bounded 100-dimensional space and there is no strong reason for fine tuning central values as opposed to values at the upper and lower tail.   
  
 ### 4.  how important is the source material (original pictures of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
