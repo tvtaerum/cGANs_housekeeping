@@ -40,10 +40,10 @@ Matters are made slightly more complicated if I want to be able to make the embe
 I have found no reason to believe that normal like distributions of random values are better than, for instance, uniform distributions of random values...  We can imagine we are in a bounded 100-dimensional space and there is no strong reason for fine tuning central values as opposed to values at the upper and lower tail.   
  
 ### 4.  how important is the source material (original pictures of faces)?
-There is
+There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
  
 ### 5.  how can I override warning messages from tensorflow?
-There is
+When debugging keras in tensorflow, it is occasionally not helpful to have tensorflow warning messages repeatedly occur.  Turning off the warning messages turned out, for me, to be surprisingly difficult.   
  
 ### 6.  how can I use embedding when I have descriptions of pictures?
 There is
