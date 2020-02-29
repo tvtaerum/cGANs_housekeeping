@@ -1,7 +1,8 @@
 # cGans_with_embedding - housekeeping
-Housekeeping python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  In contrast to many other projects, their code works 'out of the box' and they deliver what they promise.  
+#### Housekeeping python code for training and utilizing cGans with embedding.  
+In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  In contrast to many other projects, their code works 'out of the box' and they deliver what they promise.  
 
-Motivation:
+#### Motivation:
 Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, figuring out why outcomes appear dirty or messy, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 
  Using a cGAN, I provide some partial solutions to the following questions:
