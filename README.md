@@ -1,4 +1,4 @@
-# cGans_with_embedding
+# cGans_with_embedding - housekeeping
 Housekeeping python code for training cGans.  In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  In contrast to many other projects, their code works 'out of the box' and they deliver what they promise.  
 
 Motivation:
