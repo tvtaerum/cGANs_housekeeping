@@ -20,7 +20,7 @@ Even the best tutorials can leave a person scratching their head wondering if th
 
 As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  
  
-### 2.  is there a way to restart a cGAN whiich has not completed convergence:
+### 2.  is there a way to restart a cGAN which has not completed convergence:
 
 There is nothing quite as upsetting as running a stream on your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being different for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off.  As such, the cGAN will not properly restart unless you actually resolve the issues of what is trainable when and insure the dimensions of your model are correct.
 
