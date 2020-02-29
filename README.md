@@ -18,7 +18,7 @@ Even the best tutorials can leave a person scratching their head wondering if th
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
 
-As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  
+As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  The stream provides one way of giving intial estimates second and third opportunities to continue towards convergence.  
  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 
