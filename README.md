@@ -44,7 +44,7 @@ There are a numbers of perspective which I use coming from my background in anal
         - adding label to the pictures
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
-    Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
+Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
 			print("RELOADING d_model weights",j+1," from ",ijSave)
@@ -56,8 +56,8 @@ There are a numbers of perspective which I use coming from my background in anal
 			print("RELOADING gan_models weights",j+1," from ",ijSave)
 			gan_model.set_weights(gan_trainable_weights)
 ```
+It is apparent there is a relationship between model loss and mode collapse.  The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  It depends on having captured disciminator weights, generator weights, and gan weights either during initialization or later in the process when all model losses are within bounds.  
 
-    It is apparent there is a relationship between model loss and mode collapse.  The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream using your GPUs and six days later the program bombs when it appears to be 90% complete.  Needless to say, your steam needs to be prepared for such an event.  Even with preparation, attempts to restart can result in endless warnings about parameters being not trainable, dimensions of weights being wrong for discriminate, generative, and gan models, and optimization values that make no sense.  There is a lot of helpful advice if you just want to inspect weights and optimization but after six days, you want to start where you left off - how do you do it.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and reasonable values  
 
