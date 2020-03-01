@@ -31,7 +31,7 @@ I define a couple of terms which reflect my background in analytics.
   5.  how can I override warning messages from tensorflow?
   6.  how can I use embedding when I have descriptions of pictures?
   7.  how can I vectorize from generated face to generated face?
-  8.  how can I add additional information to a generated face?
+  8.  what other tweaks should be applied?
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
 
@@ -60,5 +60,8 @@ There are circumstances where we want to insure that the predicted output has pa
 ### 7.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
  
-### 8.  how can I add descriptive information to a generated face when using embedding?
-All we are doing is taking a generated face and putting a label on the picture.    
+### 8.  what other tweaks can be applied?
+  - adding label to the pictures
+  - changing Adam
+  - changing number of iterations
+  
