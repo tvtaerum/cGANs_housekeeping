@@ -8,9 +8,11 @@ Even the best tutorials can leave a person scratching their head wondering if th
 
 #### Cautions:
 
-I define a couple of terms which reflect my background in analytics.  
+I note a couple of perspective which I have given my background in analytics.  
   1.  stream:  the moving process including input of data, algorithms used, and the output of data and its evaluation.
-  2.  convergence:  Since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  In some circumstances, good models might be characteristic of streams for which continued processing always results in improved clarity of images.  
+  2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  In some circumstances, good models might be characteristic of streams for which continued processing always results in improved clarity of images.  
+  3.  limited applicability:  the methods which I describe work for the limited set of data sets and cGan problems I have investigated.
+  4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss.
   
 #### Software and hardware requirements:
     - Python
