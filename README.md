@@ -65,6 +65,11 @@ There is nothing quite as upsetting as running a stream and six days later the p
 
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  As was pointed out, the discriminator and generator models are components of the gans model and trainable flags have to be reset when loading and saving the discriminator model.  As such, if you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to make the discriminator and generator work together.  
 
+Restarting a cGan requires saving and loading models.  When saving a model, the layers that get saved are those which are trainable.  Needless to say, there are places in a stream where layers or models need to be fixed (set to trainable=False).  The following code fragment is required when saving the discriminator model:  
+```Python
+
+```
+
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
