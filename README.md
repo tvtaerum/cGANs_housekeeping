@@ -37,7 +37,7 @@ I define a couple of terms which reflect my background in analytics.
         - adding label to the pictures
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
-Even with reasonable learning rates and slopes, convergence can slide to "mode collapse" and require a complete manual restart.  The stream provides one way of giving intial estimates second and third opportunities in its slide towards convergence.  While I can provide no theoretical basis for the process, it works more often than not.  
+Even with reasonable learning rates, convergence can slide to "mode collapse" and require a complete manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```
 			if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
 				print("RELOADING d_model weights",j+1," from ",ijSave)
