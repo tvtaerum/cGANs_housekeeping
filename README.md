@@ -67,7 +67,16 @@ Once issues with dimensions and what is trainable are resolved, there are then p
 
 Restarting a cGan requires saving and loading models.  When saving a model, the layers that get saved are those which are trainable.  Needless to say, there are places in a stream where layers or models need to be fixed (set to trainable=False).  The following code fragment is required when saving the discriminator model:  
 ```Python
-
+	filename = 'celeb/results/generator_model_dis%03d.h5' % (epoch+1)
+	d_model.trainable = True
+	for layer in d_model.layers:
+		layer.trainable = True
+	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
+	d_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
+	d_model.save(filename)
+	d_model.trainable = False
+	for layer in d_model.layers:
+		layer.trainable = False
 ```
 
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
