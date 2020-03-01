@@ -28,12 +28,12 @@ I define a couple of terms which reflect my background in analytics.
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
-  5.  how can I override warning messages from tensorflow?
-  6.  how can I use embedding when I have descriptions of pictures?
-  7.  how can I vectorize from generated face to generated face?
-  8.  what other changes can be applied?
+  5.  how can I use embedding when I have descriptions of pictures?
+  6.  how can I vectorize from generated face to generated face?
+  7.  what other changes can be applied?
         - adjusting optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
+	- shutting off Tensorflow warning messages
         - adding label to the pictures
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
@@ -63,17 +63,15 @@ I have found no reason to believe that normal like distributions of random value
 ### 4.  how important is the source material (original pictures of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
  
-### 5.  how can I override warning messages from tensorflow?
-When debugging keras in tensorflow, it is occasionally not helpful to have tensorflow warning messages repeatedly occur.  Turning off the warning messages turned out, for me, to be surprisingly difficult.   
- 
-### 6.  how can I use embedding when I have descriptions of pictures?
+### 5.  how can I use embedding when I have descriptions of pictures?
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
  
-### 7.  how can I vectorize from generated face to generated face when using embedding?
+### 6.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
  
-### 8.  what other changes can be applied?
+### 7.  what other changes can be applied?
         - changing optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
+	- shutting off Tensorflow warnings
         - adding label to the pictures
   
