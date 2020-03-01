@@ -22,7 +22,8 @@ I define a couple of terms which reflect my background in analytics.
   4.  how important is the source material (original pictures of faces)?
   5.  how can I override warning messages from tensorflow?
   6.  how can I use embedding when I have descriptions of pictures?
-  7.  how can I vectorize from generated face to generated face? 
+  7.  how can I vectorize from generated face to generated face?
+  8.  how can I add additional information to a generated face?
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
 
@@ -30,9 +31,9 @@ As many experts in GAN will point out, setting learning rates and slopes are an 
  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 
-There is nothing quite as upsetting as running a stream on your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being different for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off.  As such, the cGAN will not properly restart unless you actually resolve the issues of what is trainable when and insure the dimensions of your model are correct.
+There is nothing quite as upsetting as running a stream using your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being different for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off.  As such, the cGAN will not properly restart unless you actually resolve the issues of what is trainable and insure the dimensions of your model are correct.
 
-Once issues with dimensions and what is trainable is resolved, there are then problems where models which were happily moving towards convergence show losses going to zero or ridiculously high values.  What happened?  As was pointed out, the discriminator and generator models are components of the gans model and trainable flags have to be reset when loading and saving the discriminator model.  As such, if you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there simply to make the discriminator and generator work together.  
+Once issues with dimensions and what is trainable are resolved, there are then problems where models which were happily moving towards convergence show losses going to zero or ridiculously high values.  What happened?  As was pointed out, the discriminator and generator models are components of the gans model and trainable flags have to be reset when loading and saving the discriminator model.  As such, if you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there simply to make the discriminator and generator work together.  
 
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
 
