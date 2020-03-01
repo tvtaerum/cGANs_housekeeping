@@ -6,13 +6,18 @@ In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on t
 
 Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no obvious way for figuring out why outcomes appear dirty or not clear, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 
+#### Deliverables:
+  1.  description of issues identified and resolved
+  2.  code fragments illustrating the core of how the issue was resolved
+  3.  complete cGan stream
+
 #### Cautions:
 
-I note a couple of perspective which I have given my background in analytics.  
-  1.  stream:  the moving process including input of data, algorithms used, and the output of data and its evaluation.
-  2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  In some circumstances, good models might be characteristic of streams for which continued processing always results in improved clarity of images.  
+There are a numbers of perspective which I use coming from my background in analytics.  
+  1.  stream:  the moving process of data through input, algorithms, and output of data and its evaluation.
+  2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  It's worth noting that in some circumstances, we might define a valueable stream as one where continued processing always results in improved clarity of images.  
   3.  limited applicability:  the methods which I describe work for the limited set of data sets and cGan problems I have investigated.
-  4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss.
+  4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss.  
   
 #### Software and hardware requirements:
     - Python
@@ -24,7 +29,7 @@ I note a couple of perspective which I have given my background in analytics.
 
 ##### The process:
 
- Using a cGAN, I provide some partial solutions to the following questions:
+ Using a cGAN as illustration, I provide partial solutions to the following questions:
 
   1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?
   2.  is there a way to restart a cGAN which has not completed convergence?
@@ -39,7 +44,7 @@ I note a couple of perspective which I have given my background in analytics.
         - adding label to the pictures
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
-Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
+    Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
 			print("RELOADING d_model weights",j+1," from ",ijSave)
@@ -51,7 +56,7 @@ Even with reasonable learning rates, convergence can slide to "mode collapse" an
 			print("RELOADING gan_models weights",j+1," from ",ijSave)
 			gan_model.set_weights(gan_trainable_weights)
 ```
- 
+    It is apparent there is a relationship between model loss and mode collapse.  The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream using your GPUs and six days later the program bombs when it appears to be 90% complete.  Needless to say, your steam needs to be prepared for such an event.  Even with preparation, attempts to restart can result in endless warnings about parameters being not trainable, dimensions of weights being wrong for discriminate, generative, and gan models, and optimization values that make no sense.  There is a lot of helpful advice if you just want to inspect weights and optimization but after six days, you want to start where you left off - how do you do it.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and reasonable values  
 
