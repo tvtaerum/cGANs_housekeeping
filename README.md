@@ -18,7 +18,7 @@ I define a couple of terms which reflect my background in analytics.
         - Tensorflow with Keras
         - Matplotlib
     - GPU is highly recommended
-    - Windows 10
+    - Operating system used:  Windows 10
 
 ##### The process:
 
@@ -37,7 +37,7 @@ I define a couple of terms which reflect my background in analytics.
         - adding label to the pictures
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
-Even with reasonable learning rates, convergence can slide to "mode collapse" and require a complete manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
+Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```
 			if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
 				print("RELOADING d_model weights",j+1," from ",ijSave)
@@ -51,7 +51,7 @@ Even with reasonable learning rates, convergence can slide to "mode collapse" an
 ```
  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
-There is nothing quite as upsetting as running a stream using your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being different for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off.  As such, the cGAN will not properly restart unless you actually resolve the issues of what is trainable and insure the dimensions of your model are correct.
+There is nothing quite as upsetting as running a stream using your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being wrong for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off - how do you do it.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and 
 
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  As was pointed out, the discriminator and generator models are components of the gans model and trainable flags have to be reset when loading and saving the discriminator model.  As such, if you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to make the discriminator and generator work together.  
 
