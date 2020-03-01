@@ -25,13 +25,13 @@ There are a numbers of perspective which I use coming out of my background in an
         - Tensorflow with Keras
         - Matplotlib
     - GPU is highly recommended
-    - Operating system used:  Windows 10
+    - Operating system used for development and testing:  Windows 10
 
 ##### The process:
 
- Using a cGAN as illustration, I provide partial solutions to the following questions:
+ Using a cGAN as illustration, I provide working solutions to the following questions:
 
-  1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?
+  1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes seem reasonable?
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
@@ -43,7 +43,7 @@ There are a numbers of perspective which I use coming out of my background in an
 	- shutting off Tensorflow warning messages
         - adding label to pictures
 
-### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
+### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes seem reasonable?:
 Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
