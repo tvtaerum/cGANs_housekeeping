@@ -50,5 +50,7 @@ When debugging keras in tensorflow, it is occasionally not helpful to have tenso
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
  
 ### 7.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  
+Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
  
+### 8.  how can I add descriptive information to a generated face when using embedding?
+All we are doing is taking a generated face and putting a label on the picture.    
