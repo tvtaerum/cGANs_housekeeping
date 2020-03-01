@@ -45,7 +45,7 @@ There are a numbers of perspective which I use coming from my background in anal
 
 ### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
     Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
-```
+```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
 			print("RELOADING d_model weights",j+1," from ",ijSave)
 			d_model.set_weights(d_trainable_weights)
