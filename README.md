@@ -3,16 +3,16 @@
 In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works 'out of the box' and they deliver what they promise.  In particular, the stream (Python program and process) is a derivative of tutorials by Jason Brownlee and insights on embeddings by Jeff Heaton.  The subject matter are faces derived by a process using the ipazc/mtcnn project by Iván de Paz Centeno. 
 
 #### Motivation for housekeeping:
-
 Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no obvious way for figuring out why outcomes appear dirty or not clear, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
+
+In particular, the user may not have enough memory to use the code 'out of the box', the user may have to run the stream 20 or 30 times before it avoids mode collapse, the user may be attempting to debug Tensorflow or Keras and is hindered by the never ending warning messages, the user may want to add embedding to a model and is unable to match dimensions, the stream may be interrupted six days into the process and be unable to start it from where it left off, the user may be using bad learning rates or slopes and be unable to recover from them, the user may stumble on to some bad Gan code 
 
 #### Deliverables:
   1.  description of issues identified and resolved
   2.  code fragments illustrating the core of how the issue was resolved
-  3.  complete cGan stream
+  3.  complete cGan Python program
 
 #### Cautions:
-
 There are a numbers of perspective which I use coming from my background in analytics.  
   1.  stream:  the moving process of data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.  It's worth noting that in some circumstances, we might define a valueable stream as one where continued processing always results in improved clarity of images.  
