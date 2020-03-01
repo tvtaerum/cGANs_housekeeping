@@ -24,7 +24,7 @@ I define a couple of terms which reflect my background in analytics.
 
  Using a cGAN, I provide some partial solutions to the following questions:
 
-  1.  is there an automated way to recover from bad starts when learning rates or slopes are reasonable?
+  1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
@@ -36,23 +36,17 @@ I define a couple of terms which reflect my background in analytics.
         - changing number of iterations due to memory issues
         - adding label to the pictures
 
-### 1.  what is one way to recover from poor learning rates and/or slopes:
-As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  The stream provides one way of giving intial estimates second and third opportunities in its slide towards convergence.  While I can provide no theoretical basis for the process, it works more often than not.  
+### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes are reasonable?:
+Even with reasonable learning rates and slopes, convergence can slide to "mode collapse" and require a complete manual restart.  The stream provides one way of giving intial estimates second and third opportunities in its slide towards convergence.  While I can provide no theoretical basis for the process, it works more often than not.  
 ```
 			if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
-				nTryAgains+=1
-				nTripsOnSameSavedWts+=1
-				print("LOADING d_model",j+1," from ",ijSave)
+				print("RELOADING d_model weights",j+1," from ",ijSave)
 				d_model.set_weights(d_trainable_weights)
 			if (d_loss2 < 0.001 or d_loss2 > 2.0) and ijSave > 0:
-				nTryAgains+=1
-				nTripsOnSameSavedWts+=1
-				print("LOADING g_model",j+1," from ",ijSave)
+				print("RELOADING g_model weights",j+1," from ",ijSave)
 				g_model.set_weights(g_trainable_weights)
 			if (g_loss < 0.010 or g_loss > 4.50) and ijSave > 0:
-				nTryAgains+=1
-				nTripsOnSameSavedWts+=1
-				print("LOADING gan_models",j+1," from ",ijSave)
+				print("RELOADING gan_models weights",j+1," from ",ijSave)
 				gan_model.set_weights(gan_trainable_weights)
 ```
  
