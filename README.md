@@ -38,6 +38,23 @@ I define a couple of terms which reflect my background in analytics.
 
 ### 1.  what is one way to recover from poor learning rates and/or slopes:
 As many experts in GAN will point out, setting learning rates and slopes are an art as much as a science.  The stream provides one way of giving intial estimates second and third opportunities in its slide towards convergence.  While I can provide no theoretical basis for the process, it works more often than not.  
+...
+			if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
+				nTryAgains+=1
+				nTripsOnSameSavedWts+=1
+				print("LOADING d_model",j+1," from ",ijSave)
+				d_model.set_weights(d_trainable_weights)
+			if (d_loss2 < 0.001 or d_loss2 > 2.0) and ijSave > 0:
+				nTryAgains+=1
+				nTripsOnSameSavedWts+=1
+				print("LOADING g_model",j+1," from ",ijSave)
+				g_model.set_weights(g_trainable_weights)
+			if (g_loss < 0.010 or g_loss > 4.50) and ijSave > 0:
+				nTryAgains+=1
+				nTripsOnSameSavedWts+=1
+				print("LOADING gan_models",j+1," from ",ijSave)
+				gan_model.set_weights(gan_trainable_weights)
+...
  
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream using your GPUs and two days later the program bombs when it appears to be 90% complete.  Attempts to restart end in tragedy as there are endless warnings about parameters being not trainable and dimensions of weights being different for discriminate, generative, and gan models.  There is lots of helpful advice available if you just want to inspect weights and optimization but you want to start where you left off.  As such, the cGAN will not properly restart unless you actually resolve the issues of what is trainable and insure the dimensions of your model are correct.
