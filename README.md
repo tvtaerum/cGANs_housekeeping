@@ -82,12 +82,9 @@ And when loading:
 ```Python
 	filename = 'celeb/results/generator_model_dis%03d.h5' % (ist_epochs)
 	d_model = load_model(filename, compile=True)
-	d_model.summary()
 	d_model.trainable = True
 	for layer in d_model.layers:
 		layer.trainable = True
-	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
-	d_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	d_model.summary()
 ```
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
