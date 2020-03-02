@@ -110,9 +110,34 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
  
 ### 4.  how important is the source material (original pictures of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
- 
+```Python
+def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
+	# plot images
+	for epoch in range(nRealPlots):
+		if epoch%5==0:
+			print("real_plots: ", epoch)
+		# prepare real samples
+		[X_real, labels], y_real = generate_real_samples(dataset, n_samples)
+		# scale from [-1,1] to [0,1]
+		X_real = (X_real + 1) / 2.0
+		for i in range(n * n):
+			# define subplot
+			fig = plt.subplot(n, n, 1 + i)
+			strLabel = str(labels[i])
+			fig.axis('off')
+			fig.text(8.0,20.0,strLabel, fontsize=6, color='white')
+			# plot raw pixel data
+			fig.imshow(X_real[i])
+		# save plot to file
+		filename = 'celeb/real_plots/real_plot_e%03d.png' % (epoch+1)
+		plt.savefig(filename)
+		plt.close()
+```
+It's important to note...  
 ### 5.  how can I use embedding when I have descriptions of pictures?
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
+
+
  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
