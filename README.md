@@ -178,7 +178,19 @@ From an analytical perspective, comparing row 4 (embedded value 2: attractive fe
 
 ### 7.  other changes that can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
-ADD CODE
+ 
+```Python
+	# enumerate files
+	for idx, filename in enumerate(listdir(directory)):
+		# load the image
+		pixels = load_image(directory + filename)
+		# get face
+		face = extract_face(model, pixels)
+		if face is None:
+			continue
+		if data_attractive[idx] == -1.0:
+			continue
+```
 - adjusting for memory requirements
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
