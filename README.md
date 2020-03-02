@@ -25,10 +25,10 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   3.  a cGan Python program with embedding
 
 #### Cautions:
-There are a numbers of perspective which I use coming out of my background in analytics.  
+There are a numbers of definitions and perspective which I use coming out of my background in analytics.  
   1.  stream:  the process of moving data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
-  3.  limited applicability:  the methods which I describe work for the limited set of data sets and cGan problems I have investigated.
+  3.  limited applicability:  the methods described work for a limited set of data and cGan problems.
   4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss.  
   
 #### Software and hardware requirements:
@@ -41,15 +41,15 @@ There are a numbers of perspective which I use coming out of my background in an
 
 ##### The process:
 
- Using a cGAN as illustration, I provide working solutions to the following questions:
+ Using a cGAN as illustration, I provide limited working solutions to the following problems:
 
-  1.  is there an automatic way to recover from some "mode collapse"?
+  1.  is there an automatic way to recover before "mode collapse"?
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
   5.  how can I use embedding when I have descriptions of pictures?
   6.  how can I vectorize from generated face to generated face when using embedding?
-  7.  what other changes can be applied?
+  7.  what other adjustments might be applied?
         - selecting only faces with certain features (e.g. attractiveness)
 	- adjusting for memory requirements
         - changing optimization from Adam to Adamax for embedding
