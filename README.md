@@ -2,6 +2,8 @@
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works 'out of the box' and they deliver what they promise.  In particular, the stream (Python program and process) is a derivative of tutorials by Jason Brownlee and insights on embeddings by Jeff Heaton.  The subject matter are faces derived by a process using the ipazc/mtcnn project by Iván de Paz Centeno. 
 
+![Cliff Dweller Huts](images/CliffDwellerHuts.png)
+
 #### Motivation for housekeeping:
 Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no obvious way for figuring out why outcomes appear dirty or obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 
@@ -147,12 +149,12 @@ Details are discussed in section 7.
     d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
 3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
 
-![random generated faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png)
+![random generated faces](images/4X10RandomlyGeneratedFaces.png)
  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
+Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes which were described in section 5.      
 
-![vectorized range of faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10VectorizedRangeOfFaces.png)
+![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 
 ### 7.  what other changes can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
