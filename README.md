@@ -135,7 +135,8 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 ```
 Even after working for 50 years in data/predictive analytics, it's easy to forget to look at the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.  
 ### 5.  how can I use embedding when I have descriptions of pictures?
-There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
+There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.  
+There were three parts to this process:  1. selecting out only faces identified as being "attractive" (discussed in section 7), 2. identifying the characteristics or attributes to be used and their probabilities in the population of objects, and 3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
 
 
  
@@ -144,8 +145,8 @@ Jeff Brownlee provides what I believe is a brilliant example of how to vectorize
  
 ### 7.  what other changes can be applied?
 	- only selecting faces with certain characteristics - such as attractiveness
-        - changing optimization from Adam to Adamax for embedding
-        - changing number of iterations due to memory issues
+	- changing optimization from Adam to Adamax for embedding
+	- changing number of iterations due to memory issues
 	- shutting off Tensorflow warnings
-        - adding label to the pictures 
+	- adding label to the pictures 
   
