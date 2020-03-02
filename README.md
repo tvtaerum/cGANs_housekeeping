@@ -10,9 +10,9 @@ However, even the best tutorials can leave a person scratching their head wonder
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
 In particular, the user may not have enough memory to use the code 'out of the box', the user may have to run the stream 20 or 30 times before it avoids mode collapse, attempts to debug Tensorflow or Keras are hindered by never ending warning messages, matching dimensions of generator and discriminator models may be difficult, the stream may be unable to start from where it left off, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a trivial process.
-
+<p>
 As such, while good tutorials make coding as bare bones as possible so that it's easy to explain and understand the concepts being taught, the code delivered here goes somewhat in the opposite direction.  These Python programs spend much of their time housekeeping so that they're able to carry on.    
-
+</p>
 #### Citations:
     Jason Brownlee, How to Develop a Conditional GAN (cGAN) From Scratch, Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020.
     Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network, accessed January 13th, 2020.
