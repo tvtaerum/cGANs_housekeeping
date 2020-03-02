@@ -149,12 +149,12 @@ Details are discussed in section 7.
     d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
 3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
 
-![random generated faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png)
+![random generated faces](images/4X10RandomlyGeneratedFaces.png)
  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
+Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes which were described in section 5.      
 
-![vectorized range of faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10VectorizedRangeOfFaces.png)
+![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 
 ### 7.  what other changes can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
