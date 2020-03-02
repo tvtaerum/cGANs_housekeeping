@@ -149,6 +149,9 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 It is easy to forget to look at the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.
 
 LOAD IMAGE
+https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/sampleRealImagesRows.png
+
+
 
 ### 5.  how can I use embedding when I have descriptions of pictures?
 There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, male or female, having high cheek bones, large lips, and other features.  Looking into the near future, it will be possible to create realistic GAN generated pictures of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  
