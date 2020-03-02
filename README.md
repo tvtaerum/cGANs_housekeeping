@@ -1,13 +1,19 @@
 ## cGANs_with_embedding - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
-In particular I thank Jason Brownlee and also Jeff Heaton - their tutorials on the Internet are brilliant.  Their code works 'out of the box' and they deliver what they promise.  In particular, the stream (Python program and process) is a derivative of tutorials by Jason Brownlee and insights on embeddings by Jeff Heaton.  The subject matter are faces derived by a process using the ipazc/mtcnn project by Iván de Paz Centeno. 
 
-![Cliff Dweller Huts](images/CliffDwellerHuts.png)
+In particular I thank Jason Brownlee, and Jeff Heaton for their brilliant work and tutorials (plain text citations follow immediately below the introduction).  I found their code works 'out of the box', they do a wonderful job of explaining why their streams work, and they deliver what they promise.  The test of great tutorials is whether they motivate a person to venture beyond the safe haven of working code and leave the reader with the sense of "I can do this!!!", and their tutorials do all of this.  
 
 #### Motivation for housekeeping:
-Even the best tutorials can leave a person scratching their head wondering if there are ways to make "minor" changes to the stream.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no obvious way for figuring out why outcomes appear dirty or obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
-
+When venturing into uncharted territories (for the reader), even the best tutorials can leave a person scratching their head wondering why their "minor" changes consistently result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to restart streams when convergence is not complete, no apparent explanation for outcomes which appear dirty or obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
+![Cliff Dweller Huts](images/CliffDwellerHuts.png)
 In particular, the user may not have enough memory to use the code 'out of the box', the user may have to run the stream 20 or 30 times before it avoids mode collapse, the user may be attempting to debug Tensorflow or Keras and is hindered by never ending warning messages, the user may want to add embedding to a model and is unable to match dimensions, the stream may be interrupted six days into the process and be unable to start from where it left off, the user may be using bad learning rates or slopes and be unable to recover from them, the user may attempt to use incorrect, dated, or system specific Gan code on the Internet...  
+
+In particular I thank Jason Brownlee 
+Jason Brownlee, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.
+Jason Brownlee, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.
+and also Jeff Heaton
+Jeff Heaton, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.- their tutorials on the Internet are brilliant.  Their code works 'out of the box' and they deliver what they promise.  In particular, the stream (Python program and process) is a derivative of tutorials by Jason Brownlee and insights on embeddings by Jeff Heaton.  The subject matter are faces derived by a process using the ipazc/mtcnn project by Iván de Paz Centeno.
+Iván de Paz Centeno, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.
 
 #### Deliverables:
   1.  description of issues identified and resolved
