@@ -162,7 +162,7 @@ Details are discussed in section 7.
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 As you can see, there are four kinds of embedding and the identity of the embedding (from 0 to 4) is included in the generated face. In many ways, those faces identified as being 0 are "featureless".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  Explanations for what we found is discussed in section 6.  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes which were described in section 5.      
+Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, add embedding using the four attributes described in section 5. 
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). It's important to note that everything except the embedding is identical.  
