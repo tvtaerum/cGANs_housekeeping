@@ -165,7 +165,9 @@ As you can see, there are four kinds of embedding and the identity of the embedd
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes which were described in section 5.      
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
-Going from left to right, we see Here each row reflects a feature 
+Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). It's important to note that everything except the embedding is identical.  
+
+From an analytical perspective, comparing row 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are looking only at size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
