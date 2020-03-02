@@ -51,6 +51,7 @@ There are a numbers of perspective which I use coming out of my background in an
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other changes can be applied?
         - selecting only faces with certain features (e.g. attractiveness)
+	- adjusting for memory requirements
         - changing optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
 	- shutting off Tensorflow warning messages
@@ -166,8 +167,9 @@ Jeff Brownlee provides what I believe is a brilliant example of how to vectorize
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 Going from left to right, we see Here each row reflects a feature 
 
-### 7.  what other changes can be applied?
+### 7.  other changes that can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
+- adjusting for memory requirements
 - changing optimization from Adam to Adamax for embedding
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
