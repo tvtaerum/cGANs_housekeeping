@@ -90,7 +90,23 @@ And when loading:
 Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
-I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  I did a little bit of work on that issue and found that leptokurtic distributions were poorest in generating good images.  A supposed virtue of normal-like distributions is the values further away from the centroid are supposed to provide more information than those close to the centroid but do we really believe this when generating images?  For most of the results discussed here, we are in a bounded 100-dimensional space and there is no strong reason for fine tuning central values as opposed to values at the upper and lower tail.   
+I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  I did a little bit of work on that issue and found that leptokurtic distributions were poorest in generating good images.  A virtue of normal-like distributions is the values further away from the centroid provide more information than those close to the centroid.  Do we really believe this when generating images?  For most of the results discussed here, we are in a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning central values as opposed to values at the upper and lower extremes.   
+```Python
+def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
+	# print("generate_latent_points: ", latent_dim, n_samples)
+	initX = -3.0
+	rangeX = 2.0*abs(initX)
+	stepX = rangeX / (latent_dim * n_samples)
+	x_input = asarray([initX + stepX*(float(i)) for i in range(0,latent_dim * n_samples)])
+	shuffle(x_input)
+	# reshape into a batch of inputs for the network
+	z_input = x_input.reshape(n_samples, latent_dim)
+	randx = random(n_samples)
+	labels = np.zeros(n_samples, dtype=int)
+	for i in range(n_classes):
+		labels = np.where((randx >= cumProbs[i]) & (randx < cumProbs[i+1]), i, labels)
+	return [z_input, labels]
+```
  
 ### 4.  how important is the source material (original pictures of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
