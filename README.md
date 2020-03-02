@@ -147,5 +147,5 @@ Jeff Brownlee provides what I believe is a brilliant example of how to vectorize
         - changing optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
 	- shutting off Tensorflow warnings
-        - adding label to the pictures
+        - adding label to the pictures 
   
