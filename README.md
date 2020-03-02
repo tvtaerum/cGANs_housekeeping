@@ -38,6 +38,7 @@ There are a numbers of perspective which I use coming out of my background in an
   5.  how can I use embedding when I have descriptions of pictures?
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other changes can be applied?
+        - selecting only faces with certain features (e.g. attractiveness)
         - changing optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
 	- shutting off Tensorflow warning messages
