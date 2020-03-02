@@ -1,19 +1,19 @@
 ## cGANs_with_embedding - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (plain text citations to follow), and also Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  Also thanks to Iván de Paz Centeno for his work on facial identification.  I found their code works 'out of the box', they do a wonderful job of explaining why their streams work, and they deliver what they promise.  The test of great tutorials is whether they motivate a person to venture beyond the safe haven of working code and leave the reader with the sense of "I can do this!!!", and their tutorials do all of this.  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (plain text citations to follow), and also Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  Also thanks to Iván de Paz Centeno for his work on face detection.  I found their code works 'out of the box', they do a wonderful job of explaining why their streams work, and they deliver what they promise.  The test of great tutorials is whether they motivate a person to venture beyond the safe haven of working code and leave the reader with the sense of "I can do this!!!", and their tutorials do all of this.  
 
 #### Motivation for housekeeping:
 No one said it was going to be easy.  When venturing into uncharted territories, even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start streams from where it left off, no apparent explanation for generated outcomes which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 ![Cliff Dweller Huts](images/CliffDwellerHuts.png)
 In particular, the user may not have enough memory to use the code 'out of the box', the user may have to run the stream 20 or 30 times before it avoids mode collapse, the user may be attempting to debug Tensorflow or Keras and is hindered by never ending warning messages, the user may want to add embedding to a model and is unable to match dimensions, the stream may be interrupted six days into the process and be unable to start from where it left off, the user may be using bad learning rates or slopes and be unable to recover from them, the user may attempt to use incorrect, dated, or system specific Gan code on the Internet...  
 
-In particular I thank Jason Brownlee 
-Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network/#comment-523944, accessed March 2nd, 2020.
-Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network/#comment-523944, accessed March 2nd, 2020.
+#### References:
+Jason Brownlee, How to Develop a Conditional GAN (cGAN) From Scratch, Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020.
+Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network, accessed January 13th, 2020.
 and also Jeff Heaton
-Jeff Heaton, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.- their tutorials on the Internet are brilliant.  Their code works 'out of the box' and they deliver what they promise.  In particular, the stream (Python program and process) is a derivative of tutorials by Jason Brownlee and insights on embeddings by Jeff Heaton.  The subject matter are faces derived by a process using the ipazc/mtcnn project by Iván de Paz Centeno.
-Iván de Paz Centeno, Deep Learning with Time Series Forecasting, Machine Learning Mastery, Available from https://machinelearningmastery.com/machine-learning-with-python/, accessed November 6th, 2018.
+Jeff Heaton, Jeff Heaton's Deep Learning Course, Available from https://www.heatonresearch.com/course/, accessed February, 2020.
+Iván de Paz Centeno, MTCNN face detection implementation for TensorFlow, as a PIP package, Available from https://github.com/ipazc/mtcnn, accessed February, 2020.
 
 #### Deliverables:
   1.  description of issues identified and resolved
@@ -39,7 +39,7 @@ There are a numbers of perspective which I use coming out of my background in an
 
  Using a cGAN as illustration, I provide working solutions to the following questions:
 
-  1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes seem reasonable?
+  1.  is there an automatic way to recover from some "mode collapse"?
   2.  is there a way to restart a cGAN which has not completed convergence?
   3.  are there non-random initialization values that can be useful?
   4.  how important is the source material (original pictures of faces)?
@@ -52,7 +52,7 @@ There are a numbers of perspective which I use coming out of my background in an
 	- shutting off Tensorflow warning messages
         - adding label to pictures
 
-### 1.  is there an automatic way to recover from "mode collapse" when learning rates or slopes seem reasonable?:
+### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide to "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
