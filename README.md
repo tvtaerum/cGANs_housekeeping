@@ -144,7 +144,7 @@ https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/imag
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
 
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png
+https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10VectorizedRangeOfFaces.png
 
 ### 7.  what other changes can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
