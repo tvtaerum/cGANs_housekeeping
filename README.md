@@ -137,9 +137,16 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 Even after working for 50 years in data/predictive analytics, it's easy to forget to look at the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.  
 ### 5.  how can I use embedding when I have descriptions of pictures?
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.  
-There were three parts to this process:  1. selecting out only faces identified as being "attractive" (discussed in section 7), 2. identifying the characteristics or attributes to be used and their probabilities in the population of objects, and 3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
+There were three parts to this process:  
+1. selecting a subset of faces (only those identified as being "attractive"):
+Details are discussed in section 7. 
+2. identifying the characteristics or attributes to be used and their probabilities in the population of objects:
+    a. 0 = featured as being attractive and not male and not high cheek bone and not large lips
+    b. 1 = featured as being attractive and male
+    c. 2 = featured as being attractive and not male and high cheek bone
+    d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
+3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
 
-![Image description](link-to-image)
 ![random generated faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png)
  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
