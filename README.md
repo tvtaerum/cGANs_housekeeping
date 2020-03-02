@@ -133,7 +133,7 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 		plt.savefig(filename)
 		plt.close()
 ```
-It's important to note...  
+Even after working for 50 years in data/predictive analytics, it's easy to forget to look at the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.  
 ### 5.  how can I use embedding when I have descriptions of pictures?
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.   
 
@@ -143,6 +143,7 @@ There are circumstances where we want to insure that the predicted output has pa
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
  
 ### 7.  what other changes can be applied?
+	- only selecting faces with certain characteristics - such as attractiveness
         - changing optimization from Adam to Adamax for embedding
         - changing number of iterations due to memory issues
 	- shutting off Tensorflow warnings
