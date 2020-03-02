@@ -6,8 +6,9 @@ In particular I thank Jason Brownlee for his brilliant work and tutorials at htt
 #### Motivation for housekeeping:
 The test of great tutorials is whether they motivate a person to venture beyond the safe haven of working code and leave the reader with the sense of "I can do this!!!", and their tutorials do all of this.  Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start streams from where it left off, no apparent explanation for generated outcomes which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 ![Cliff Dweller Huts](images/CliffDwellerHuts.png)
-<img src="/images/CliffDwellerHuts" width="100" height="100">
+<img src="./images/CliffDwellerHuts" width="100" height="100">
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="100" height="100">
+
 In particular, the user may not have enough memory to use the code 'out of the box', the user may have to run the stream 20 or 30 times before it avoids mode collapse in startup, the user may be attempting to debug Tensorflow or Keras and is hindered by never ending warning messages, the user may want to add embedding to a model and be unable to match dimensions, the stream may be interrupted six days into the process and be unable to start from where it left off, the user may attempt to use incorrect, dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a trivial process.
 
 As such, while good tutorials make things bare bone straight forward so that it's easy to explain and understand the concepts being taught, the code delivered here goes somewhat in the opposite direction.  These Python programs spend much of their time housekeeping so that they're able to carry on.    
