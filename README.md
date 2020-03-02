@@ -146,6 +146,9 @@ Jeff Brownlee provides what I believe is a brilliant example of how to vectorize
 ### 7.  what other changes can be applied?
 	- only selecting faces with certain characteristics - such as attractiveness
 	- changing optimization from Adam to Adamax for embedding
+```Python
+	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
+```
 	- changing number of iterations due to memory issues
 	- shutting off Tensorflow warnings
 	- adding label to the pictures 
