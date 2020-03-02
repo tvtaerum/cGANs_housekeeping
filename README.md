@@ -6,6 +6,7 @@ In particular I thank Jason Brownlee for his brilliant work and tutorials at htt
 #### Motivation for housekeeping:
 The test of great tutorials is whether they motivate a person to venture beyond the safe haven of working code and leave the reader with the sense of "I can do this!!!", and their tutorials do all of this.  Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start streams from where it left off, no apparent explanation for generated outcomes which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated outcomes when embedding is employed.   
 ![Cliff Dweller Huts](images/CliffDwellerHuts.png)
+![Cliff Dweller Huts](images/CliffDwellerHuts.png?v=4&s=200)
 <img src="./images/CliffDwellerHuts" width="100" height="100">
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="100" height="100">
 
