@@ -54,7 +54,6 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - selecting only faces with certain features (e.g. attractiveness)
 	- adjusting for memory requirements
         - changing optimization from Adam to Adamax for embedding
-        - changing number of iterations due to memory issues
 	- shutting off Tensorflow warning messages
         - adding label to pictures
 
@@ -171,11 +170,35 @@ Going from left to right, we see Here each row reflects a feature
 ### 7.  other changes that can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
 - adjusting for memory requirements
+```Python
+def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
+	bat_per_epo = int(dataset[0].shape[0] / n_batch)
+...
+train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
+```
 - changing optimization from Adam to Adamax for embedding
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
-- changing number of iterations due to memory issues
 - shutting off Tensorflow warnings
+```Python
+qErrorHide = True
+if qErrorHide:
+    print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
+    log().setLevel('ERROR')
+```
 - adding label to the pictures 
-  
+```Python
+def save_plot(examples, labels, epoch, n=10):
+	examples = (examples + 1) / 2.0
+	# plot images
+	for i in range(n * n):
+		fig = plt.subplot(n, n, 1 + i)
+		strLabel = str(labels[i])
+		fig.axis('off')
+		fig.text(8.0,20.0,strLabel, fontsize=6, color='white')
+		fig.imshow(examples[i])
+	filename = 'celeb/results/generated_plot_e%03d.png' % (epoch+1)
+	plt.savefig(filename)
+	plt.close()
+```
