@@ -123,6 +123,11 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
  
 ### 4.  how important is the source material (original pictures of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
+
+It is easy to forget to examine the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.
+
+![real faces rows](images/sampleRealImagesRows.png)
+
 ```Python
 def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 	# plot images
@@ -146,10 +151,7 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 		plt.savefig(filename)
 		plt.close()
 ```
-It is easy to forget to look at the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.
-
-![real faces rows](images/sampleRealImagesRows.png)
-
+When we look at the transformed images going into the analysis in detail, we can see effects due to pixelation.  
 ![real faces](images/sampleRealImages.png)
 
 ### 5.  how can I use embedding when I have descriptions of pictures?
