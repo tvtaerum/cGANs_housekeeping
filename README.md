@@ -139,12 +139,13 @@ Even after working for 50 years in data/predictive analytics, it's easy to forge
 There are circumstances where we want to insure that the predicted output has particular characteristics, such as whether the face is attractive, what their gender is, and if they have high cheek bones, large lips, lots of hair, and other features.  At some point, it will be possible to create realistic GAN generated pictures of models wearing particular clothing, with specific expressions, and poses for catalogues.  
 There were three parts to this process:  1. selecting out only faces identified as being "attractive" (discussed in section 7), 2. identifying the characteristics or attributes to be used and their probabilities in the population of objects, and 3. setting up the cGAN so that it will generate faces based on the attributes (embeddings) associated with a picture.  
 
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png
+![Image description](link-to-image)
+![random generated faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10RandomlyGeneratedFaces.png)
  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  We vectorize two generated faces and, for the same 100-dimensional space, add embedding with four attributes:  0, no descriptor; 1 male; 2 high cheek bones; 3 large lips.    
 
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10VectorizedRangeOfFaces.png
+![vectorized range of faces](https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/4X10VectorizedRangeOfFaces.png)
 
 ### 7.  what other changes can be applied?
 - only selecting faces with certain characteristics - such as attractiveness
