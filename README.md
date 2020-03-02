@@ -14,8 +14,8 @@ In particular, the user may not have enough memory to use the code 'out of the b
 
 #### Cautions:
 There are a numbers of perspective which I use coming out of my background in analytics.  
-  1.  stream:  the moving process of data through input, algorithms, and output of data and its evaluation.
-  2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in clarity of images being generated.   
+  1.  stream:  the process of moving data through input, algorithms, and output of data and its evaluation.
+  2.  convergence:  since there are no unique solutions in GAN, convergence occurs when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
   3.  limited applicability:  the methods which I describe work for the limited set of data sets and cGan problems I have investigated.
   4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss.  
   
