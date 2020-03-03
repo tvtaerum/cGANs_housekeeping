@@ -5,6 +5,7 @@ In particular I thank Jason Brownlee for his brilliant work and tutorials at htt
 
 <frameset cols="50%,50%">
 <frame src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_convert_mtcnn_attractive_faces.py" >
+<frame src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_convert_mtcnn_attractive_faces.py" >	
 </frameset>
 
 
