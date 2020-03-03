@@ -34,8 +34,8 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   5.  a Python program which vectorizes image generated with embedding
 
 ### Limitations:
-There are a numbers of definitions and perspective which I use coming out of my background in analytics.  
-  1.  stream:  the overall process of streaming/moving data through input, algorithms, and output of data and its evaluation.
+
+  1.  stream:  refers to the overall process of streaming/moving data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence is sufficient when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
   3.  limited applicability:  the methods described work for a limited set of data and cGan problems.
   4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss - when model loss is extreme (too high or too low) then there is mode collapse.  
