@@ -48,15 +48,15 @@ There are a numbers of definitions and perspective which I use coming out of my 
   1.  is there an automatic way to recover before "mode collapse"?
   2.  is there a way to restart a cGAN which is interrupted or has not completed convergence?
   3.  are there non-random initialization values that can be useful?
-  4.  how important is the source material (original pictures of faces)?
-  5.  how can I use embedding when I have descriptions of pictures?
+  4.  how important is the source material (original images of faces)?
+  5.  how can I use embedding when I have descriptions of images?
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other adjustments might be applied?
         - selecting only faces with certain features (e.g. attractiveness)
         - adjusting for memory requirements
         - changing optimization from Adam to Adamax for embedding
         - shutting off Tensorflow warning messages
-        - adding label to pictures
+        - adding label to images
 
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
@@ -100,7 +100,7 @@ And when loading:
 		layer.trainable = True
 	d_model.summary()
 ```
-Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other pictures to the training.    
+Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other images to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
 I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  A small investigation on that issue indicated that leptokurtic distributions were poorest in generating good images.  In general statistical analysis using normal distributions, those values which are furthest away from the centroid provide the greatest amount of information.  Do we really believe this when generating images?  For most of the results discussed here, I use a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning centroid values as opposed to values at the upper and lower extremes.   
@@ -121,7 +121,7 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 	return [z_input, labels]
 ```
  
-### 4.  how important is the source material (original pictures of faces)?
+### 4.  how important is the source material (original images of faces)?
 There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
 
 It is easy to forget to examine the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.
@@ -154,8 +154,8 @@ def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
 When we look at the transformed images going into the analysis in detail, we can see effects due to pixelation.  
 ![real faces](images/sampleRealImages.png)
 
-### 5.  how can I use embedding when I have descriptions of pictures?
-There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, male or female, having high cheek bones, large lips, and other features.  Looking into the near future, it will be possible to create realistic GAN generated pictures of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  
+### 5.  how can I use embedding when I have descriptions of images?
+There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, male or female, having high cheek bones, large lips, and other features.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  
 
 There were three parts to this process:  
 1. selecting a subset of faces (only those identified as being "attractive"):
@@ -165,7 +165,7 @@ Details of the process are discussed in section 7.
       b. 1 = featured as being attractive and male
       c. 2 = featured as being attractive and not male and high cheek bone
       d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
-3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with a picture.  
+3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with a image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 As you can see, there are four kinds of embedding and the identity of the embedding (from 0 to 4) is included in the generated face. In many ways, those faces identified as being 0 are "featureless".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  To be clear, embedding does NOT refer to the cardinal number being included in the image - those labels are added when creating the image.  Explanations for what we found is discussed in section 6.  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
@@ -209,7 +209,7 @@ if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
 ```
-- adding label to the pictures 
+- adding label to the images 
 ```Python
 def save_plot(examples, labels, epoch, n=10):
 	examples = (examples + 1) / 2.0
