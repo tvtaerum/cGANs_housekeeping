@@ -3,12 +3,6 @@
 
 In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they run 'out of the box' and they do a wonderful job of explaining why their streams work.  The test of great tutorials is, of course, whether they motivate a person to venture beyond the safe haven of working code.  In my view, these tutorials deliver as promised in spades.  
 
-<frameset cols="50%,50%">
-<frame src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_convert_mtcnn_attractive_faces.py" >
-<frame src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_convert_mtcnn_attractive_faces.py" >	
-</frameset>
-
-
 ### Motivation for housekeeping:
 Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
