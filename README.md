@@ -62,10 +62,11 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - shutting off Tensorflow warning messages
         - adding label to images
   8.  cGan stream:
-  	- pulling original images
-	- selecting out subset of images and compressing
-	- cGan stream 
-	- vectorizing images
+        - download celebrity images
+        - create face shots from images
+        - select out subset of images with attractive faces and compress
+        - cGan stream 
+        - vectorize images
   
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
@@ -234,7 +235,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan stream:
-  	- pulling original images
-	- selecting out subset of images and compressing
-	- cGan stream 
-	- vectorizing images
+        - download celebrity images
+        - create face shots from images
+        - select out subset of images with attractive faces and compress
+        - cGan stream 
+        - vectorize images
