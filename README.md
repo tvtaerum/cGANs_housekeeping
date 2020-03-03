@@ -5,7 +5,6 @@ In particular I thank Jason Brownlee for his brilliant work and tutorials at htt
 
 #### Motivation for housekeeping:
 Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
-<!-- ![Cliff Dweller Huts](images/CliffDwellerHuts.png)  -->
 <p align="center">
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
