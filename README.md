@@ -61,7 +61,7 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - changing optimization from Adam to Adamax for embedding
         - shutting off Tensorflow warning messages
         - adding label to images
-  8.  Python programs?
+  8.  cGan stream:
   	- pulling original images
 	- selecting out subset of images and compressing
 	- cGan stream 
@@ -233,7 +233,7 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.savefig(filename)
 	plt.close()
 ```
-###  8.  cGan Python programs?
+###  8.  cGan stream:
   	- pulling original images
 	- selecting out subset of images and compressing
 	- cGan stream 
