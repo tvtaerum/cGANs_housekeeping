@@ -61,7 +61,12 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - changing optimization from Adam to Adamax for embedding
         - shutting off Tensorflow warning messages
         - adding label to images
-
+  8.  Python programs?
+  	- pulling original images
+	- selecting out subset of images and compressing
+	- cGan stream 
+	- vectorizing images
+  
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```Python
@@ -228,3 +233,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.savefig(filename)
 	plt.close()
 ```
+###  8.  cGan Python programs?
+  	- pulling original images
+	- selecting out subset of images and compressing
+	- cGan stream 
+	- vectorizing images
