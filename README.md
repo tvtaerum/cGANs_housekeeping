@@ -1,4 +1,4 @@
-## cGANs_with_embedding in images - housekeeping
+## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
 In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they run 'out of the box' and they do a wonderful job of explaining why their streams work.  The test of great tutorials is, of course, whether they motivate a person to venture beyond the safe haven of working code.  In my view, these tutorials deliver as promised in spades.  
