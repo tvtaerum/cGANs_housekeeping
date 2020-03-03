@@ -16,7 +16,7 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 
 #### Citations:
 <dl>
-<dd> Jason Brownlee, How to Develop a Conditional GAN (cGAN) From Scratch, Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020. </dd>
+	<dt> Jason Brownlee, How to Develop a Conditional GAN (cGAN) From Scratch,</dt><dd> Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020. </dd>
 <dd>Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network, accessed January 13th, 2020. </dd>
 <dd>Iván de Paz Centeno, MTCNN face detection implementation for TensorFlow, as a PIP package, Available from https://github.com/ipazc/mtcnn, accessed February, 2020. </dd>
 <dd>Jeff Heaton, Jeff Heaton's Deep Learning Course, Available from https://www.heatonresearch.com/course/, accessed February, 2020. </dd>
