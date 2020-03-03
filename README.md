@@ -30,7 +30,7 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   3.  a cGan Python program with embedding
   4.  vectorized image generation with embedding
 
-#### Cautions:
+#### Limitations:
 There are a numbers of definitions and perspective which I use coming out of my background in analytics.  
   1.  stream:  the overall process of streaming/moving data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence is sufficient when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
