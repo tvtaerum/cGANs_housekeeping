@@ -90,8 +90,8 @@ There is nothing quite as upsetting as running a stream and six days later the p
 <p align="center">
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/improvedImagesOverEpochs.png" width="650" height="500">
 </p>
-The previous image illustrates the potential improvement over epochs.  The numbers on the left side are the number of epochs required to produce the observed results.  You can see the faint images of faces by epoch 5, blurry details of faces by epoch 45, details by epoch 165 and small improvements by epoch 205.  Imagine what would be missed if you could not restart the stream at epoch 45?  
- 
+The previous image illustrates the potential improvement over epochs.  The numbers on the left side are the number of epochs required to produce the observed results.  You can see the faint images of faces by epoch 5, good outlines of faces by epoch 45, details of faces by epoch 165 and small improvements by epoch 205.  Imagine what would be missed if you could not restart the stream at epoch 45?  
+     
 Needless to say, your steam needs to be prepared for such an event.  Even with preparation, attempts to restart can result in warnings about parameters being not trainable, dimensions of weights being wrong for discriminate, generative, and gan models, and optimizations that collapse.  There is a lot of helpful advice if you just want to inspect weights but after six days, you want to start where you left off - how do you do it?  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. 
  
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to make the discriminator and generator work together.  
