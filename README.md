@@ -55,19 +55,20 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other adjustments might be applied?
 <ol type="a">
-	<li>a. selecting only faces with certain features (e.g. attractiveness)</li>
-        <li>b. adjusting for memory requirements</li>
-        <li>c. changing optimization from Adam to Adamax for embedding</li>
-        <li>d. shutting off Tensorflow warning messages</li>
-        <li>e. adding label to images</li>
+	<li>selecting only faces with certain features (e.g. attractiveness)</li>
+        <li>adjusting for memory requirements</li>
+        <li>changing optimization from Adam to Adamax for embedding</li>
+        <li>shutting off Tensorflow warning messages</li>
+        <li>adding label to images</li>
 </ol>
   8.  cGan stream:
-        a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-        b. create face shots from images using https://github.com/ipazc/mtcnn
-        c. select out subset of images with attractive faces 
-        d. cGan stream 
-        e. vectorize images
-  
+<ol type="a">        
+	<li>download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset</li>
+        <li>create face shots from images using https://github.com/ipazc/mtcnn</li>
+        <li>select out subset of images with attractive faces</li>
+        <li>cGan stream</li>
+        <li>vectorize images</li>
+</ol>
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 ```Python
