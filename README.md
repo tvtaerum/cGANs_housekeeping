@@ -3,7 +3,7 @@
 
 In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (plain text citations follow below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they run 'out of the box' and they do a wonderful job of explaining why their streams work.  The test of great tutorials is, of course, whether they motivate a person to venture beyond the safe haven of working code.  In my view, these tutorials deliver as promised in spades.  
 
-#### Motivation for housekeeping:
+### Motivation for housekeeping:
 Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
 <img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="650" height="280">
@@ -13,7 +13,7 @@ In particular, the user may not have enough memory to use the code 'out of the b
 
 As such, while good tutorials make coding as bare bones as possible so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that they're able to carry on in spite of small obstacles.    
 
-#### Citations:
+### Citations:
 <dl>
 <dt> Jason Brownlee, How to Develop a Conditional GAN (cGAN) From Scratch,</dt><dd> Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020. </dd>
 <dt>Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, </dt><dd>Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network, accessed January 13th, 2020. </dd>
@@ -21,21 +21,21 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 <dt>Jeff Heaton, Jeff Heaton's Deep Learning Course,</dt><dd> Available from https://www.heatonresearch.com/course/, accessed February, 2020. </dd>
 </dl>
 
-#### Deliverables:
+### Deliverables:
   1.  description of issues identified and resolved within specified limitations
   2.  code fragments illustrating the core of how the issue was resolved
   3.  Python programs to prepare images for selection and training
   4.  a cGan Python program with embedding
   5.  a Python program which vectorizes image generated with embedding
 
-#### Limitations:
+### Limitations:
 There are a numbers of definitions and perspective which I use coming out of my background in analytics.  
   1.  stream:  the overall process of streaming/moving data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence is sufficient when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
   3.  limited applicability:  the methods described work for a limited set of data and cGan problems.
   4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss - when model loss is extreme (too high or too low) then there is mode collapse.  
   
-#### Software and hardware requirements:
+### Software and hardware requirements:
     - Python
         - Numpy
         - Tensorflow with Keras
@@ -43,7 +43,7 @@ There are a numbers of definitions and perspective which I use coming out of my 
     - GPU is highly recommended
     - Operating system used for development and testing:  Windows 10
 
-##### The process:
+#### The process:
 
  Using a cGAN as illustration, I provide limited working solutions to the following problems:
 
@@ -192,7 +192,7 @@ Going from left to right, we see the face on the left morphing into the face on 
 From an analytical perspective, comparing row 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are looking only at size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
-##### a. only selecting faces with certain characteristics - such as attractiveness
+#### a. only selecting faces with certain characteristics - such as attractiveness
  
 ```Python
 	# enumerate files
@@ -206,25 +206,25 @@ From an analytical perspective, comparing row 4 (embedded value 2: attractive fe
 		if data_attractive[idx] == -1.0:
 			continue
 ```
-##### b. adjusting for memory requirements
+#### b. adjusting for memory requirements
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 ...
 train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
 ```
-##### c. changing optimization from Adam to Adamax for embedding
+#### c. changing optimization from Adam to Adamax for embedding
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
-##### d. shutting off Tensorflow warnings
+#### d. shutting off Tensorflow warnings
 ```Python
 qErrorHide = True
 if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
 ```
-##### e. adding label to the images 
+#### e. adding label to the images 
 ```Python
 def save_plot(examples, labels, epoch, n=10):
 	examples = (examples + 1) / 2.0
@@ -240,8 +240,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan stream:
-##### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-##### b. create face shots from images using https://github.com/ipazc/mtcnn
-##### c. select out subset of images with attractive faces and compress
-##### d. cGan stream 
-##### e. vectorize images
+#### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
+#### b. create face shots from images using https://github.com/ipazc/mtcnn
+#### c. select out subset of images with attractive faces and compress
+#### d. cGan stream 
+#### e. vectorize images
