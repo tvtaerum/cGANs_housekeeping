@@ -87,7 +87,9 @@ What happens then is discriminator, generator, and gan weights are collected whe
 
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Needless to say, your steam needs to be prepared for such an event.  Even with preparation, attempts to restart can result in warnings about parameters being not trainable, dimensions of weights being wrong for discriminate, generative, and gan models, and optimizations that collapse.  There is a lot of helpful advice if you just want to inspect weights but after six days, you want to start where you left off - how do you do it?  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models.    
-
+<p align="center">
+<img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/improvedImagesOverEpochs.png" width="650" height="280">
+</p>
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to make the discriminator and generator work together.  
 
 Restarting a cGAN requires saving models and their optimizations in case they are required.  When saving a model, the layers that get saved are those which are trainable.  It's worth remembering that the discriminator model is set to trainable=False within the gan model.   Needless to say, there are places in a stream where layers or models need to be trainable=False.  The following code fragment is required when saving the discriminator model:  
