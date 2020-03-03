@@ -1,7 +1,7 @@
 ## cGANs_with_embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (plain text citations follow), Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch, and Iván de Paz Centeno for his work on face detection https://github.com/ipazc/mtcnn.  I found their code work to be complete, they run 'out of the box' and they do a wonderful job of explaining why their streams work.  The test of great tutorials is, of course, whether they motivate a person to venture beyond the safe haven of working code.  In my view, these tutorials delivered as promised in spades.  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (plain text citations follow), Iván de Paz Centeno for his work on face detection https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, they run 'out of the box' and they do a wonderful job of explaining why their streams work.  The test of great tutorials is, of course, whether they motivate a person to venture beyond the safe haven of working code.  In my view, these tutorials delivered as promised in spades.  
 
 #### Motivation for housekeeping:
 Even the best tutorials can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
@@ -19,10 +19,10 @@ As such, while good tutorials make coding as bare bones as possible so that it's
         Available from https://machinelearningmastery.com/how-to-develop-a-conditional-generative-adversarial-network-from-scratch, accessed January 4th, 2020.
     Jason Brownlee, How to Explore the GAN Latent Space When Generating Faces, 
         Available from https://machinelearningmastery.com/how-to-interpolate-and-perform-vector-arithmetic-with-faces-using-a-generative-adversarial-network, accessed January 13th, 2020.
-    Jeff Heaton, Jeff Heaton's Deep Learning Course, 
-        Available from https://www.heatonresearch.com/course/, accessed February, 2020.
     Iván de Paz Centeno, MTCNN face detection implementation for TensorFlow, as a PIP package, 
         Available from https://github.com/ipazc/mtcnn, accessed February, 2020.
+    Jeff Heaton, Jeff Heaton's Deep Learning Course, 
+        Available from https://www.heatonresearch.com/course/, accessed February, 2020.
 
 #### Deliverables:
   1.  description of issues identified and resolved
