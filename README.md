@@ -90,7 +90,7 @@ There is nothing quite as upsetting as running a stream and six days later the p
 
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream, rather than simply inspect weights, you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to make the discriminator and generator work together.  
 
-Restarting a cGAN requires saving models and their optimizations in case they are required.  When saving a model, the layers that get saved are those which are trainable.  It's worth remembering that the discriminator model is set to trainable=False within the gan model.   Needless to say, there are places in a stream where layers or models need to be fixed (set to trainable=False).  The following code fragment is required when saving the discriminator model:  
+Restarting a cGAN requires saving models and their optimizations in case they are required.  When saving a model, the layers that get saved are those which are trainable.  It's worth remembering that the discriminator model is set to trainable=False within the gan model.   Needless to say, there are places in a stream where layers or models need to be trainable=False.  The following code fragment is required when saving the discriminator model:  
 ```Python
 	filename = 'celeb/results/generator_model_dis%03d.h5' % (epoch+1)
 	d_model.trainable = True
@@ -110,7 +110,7 @@ And when loading:
 		layer.trainable = True
 	d_model.summary()
 ```
-Matters are made slightly more complicated if I want to be able to make the embedding layers fixed once training is complete but add other images to the training.    
+Matters are made slightly more complicated if I want to be able to make the embedding layers trainable=False once training is complete but add other images to the training.    
 
 ### 3.  are there non-random initialization values that can be useful?
 I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  A small investigation on that issue indicated that leptokurtic distributions were poorest in generating good images.  In general statistical analysis using normal distributions, those values which are furthest away from the centroid provide the greatest amount of information.  Do we really believe this when generating images?  For most of the results discussed here, I use a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning centroid values as opposed to values at the upper and lower extremes.   
