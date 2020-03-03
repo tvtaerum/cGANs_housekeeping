@@ -63,7 +63,7 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - adding label to images
   8.  cGan stream:
         - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-        - create face shots from images using 
+        - create face shots from images using https://github.com/ipazc/mtcnn
         - select out subset of images with attractive faces 
         - cGan stream 
         - vectorize images
@@ -242,7 +242,7 @@ def save_plot(examples, labels, epoch, n=10):
 ```
 ###  8.  cGan stream:
         - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-        - create face shots from images using 
+        - create face shots from images using https://github.com/ipazc/mtcnn
         - select out subset of images with attractive faces and compress
         - cGan stream 
         - vectorize images
