@@ -25,7 +25,7 @@ As such, while good tutorials make coding as bare bones as possible so that it's
         Available from https://www.heatonresearch.com/course/, accessed February, 2020.
 
 #### Deliverables:
-  1.  description of issues identified and resolved
+  1.  description of issues identified and resolved within specified limitations
   2.  code fragments illustrating the core of how the issue was resolved
   3.  Python programs to prepare images for selection and training
   4.  a cGan Python program with embedding
