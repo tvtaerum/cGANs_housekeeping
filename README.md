@@ -57,17 +57,17 @@ There are a numbers of definitions and perspective which I use coming out of my 
   5.  how can I use embedding when I have descriptions of images?
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other adjustments might be applied?
-        - selecting only faces with certain features (e.g. attractiveness)
-        - adjusting for memory requirements
-        - changing optimization from Adam to Adamax for embedding
-        - shutting off Tensorflow warning messages
-        - adding label to images
+        a. selecting only faces with certain features (e.g. attractiveness)
+        b. adjusting for memory requirements
+        c. changing optimization from Adam to Adamax for embedding
+        d. shutting off Tensorflow warning messages
+        e. adding label to images
   8.  cGan stream:
-        - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-        - create face shots from images using https://github.com/ipazc/mtcnn
-        - select out subset of images with attractive faces 
-        - cGan stream 
-        - vectorize images
+        a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
+        b. create face shots from images using https://github.com/ipazc/mtcnn
+        c. select out subset of images with attractive faces 
+        d. cGan stream 
+        e. vectorize images
   
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
@@ -195,7 +195,7 @@ Going from left to right, we see the face on the left morphing into the face on 
 From an analytical perspective, comparing row 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are looking only at size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
-- only selecting faces with certain characteristics - such as attractiveness
+##### a. only selecting faces with certain characteristics - such as attractiveness
  
 ```Python
 	# enumerate files
@@ -209,25 +209,25 @@ From an analytical perspective, comparing row 4 (embedded value 2: attractive fe
 		if data_attractive[idx] == -1.0:
 			continue
 ```
-- adjusting for memory requirements
+##### b. adjusting for memory requirements
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 ...
 train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
 ```
-- changing optimization from Adam to Adamax for embedding
+##### c. changing optimization from Adam to Adamax for embedding
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
-- shutting off Tensorflow warnings
+##### d. shutting off Tensorflow warnings
 ```Python
 qErrorHide = True
 if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
 ```
-- adding label to the images 
+##### e. adding label to the images 
 ```Python
 def save_plot(examples, labels, epoch, n=10):
 	examples = (examples + 1) / 2.0
@@ -243,8 +243,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan stream:
-        - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
-        - create face shots from images using https://github.com/ipazc/mtcnn
-        - select out subset of images with attractive faces and compress
-        - cGan stream 
-        - vectorize images
+##### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
+##### b. create face shots from images using https://github.com/ipazc/mtcnn
+##### c. select out subset of images with attractive faces and compress
+##### d. cGan stream 
+##### e. vectorize images
