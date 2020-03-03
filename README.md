@@ -62,9 +62,9 @@ There are a numbers of definitions and perspective which I use coming out of my 
         - shutting off Tensorflow warning messages
         - adding label to images
   8.  cGan stream:
-        - download celebrity images
-        - create face shots from images
-        - select out subset of images with attractive faces and compress
+        - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
+        - create face shots from images using 
+        - select out subset of images with attractive faces 
         - cGan stream 
         - vectorize images
   
@@ -241,8 +241,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan stream:
-        - download celebrity images
-        - create face shots from images
+        - download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
+        - create face shots from images using 
         - select out subset of images with attractive faces and compress
         - cGan stream 
         - vectorize images
