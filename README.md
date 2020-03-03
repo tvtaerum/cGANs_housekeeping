@@ -47,13 +47,14 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 
  Using a cGAN as illustration, I provide limited working solutions to the following problems:
 
-  1.  is there an automatic way to recover before "mode collapse"?
-  2.  is there a way to restart a cGAN which is interrupted or has not completed convergence?
-  3.  are there non-random initialization values that can be useful?
-  4.  how important is the source material (original images of faces)?
-  5.  how can I use embedding when I have descriptions of images?
-  6.  how can I vectorize from generated face to generated face when using embedding?
-  7.  what other adjustments might be applied?
+<ol type="1">
+  <li>is there an automatic way to recover before "mode collapse"?</li>
+  <li>is there a way to restart a cGAN which is interrupted or has not completed convergence?</li>
+  <li>are there non-random initialization values that can be useful?</li>
+  <li>how important is the source material (original images of faces)?</li>
+  <li>how can I use embedding when I have descriptions of images?</li>
+  <li>how can I vectorize from generated face to generated face when using embedding?</li>
+  <li>what other adjustments might be applied?</li>
 <ol type="a">
 	<li>selecting only faces with certain features (e.g. attractiveness)</li>
         <li>adjusting for memory requirements</li>
@@ -61,13 +62,14 @@ As such, while good tutorials make coding as bare bones as possible so that it's
         <li>shutting off Tensorflow warning messages</li>
         <li>adding label to images</li>
 </ol>
-  8.  cGan stream:
+  <li>cGan stream:
 <ol type="a">        
 	<li>download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset</li>
         <li>create face shots from images using https://github.com/ipazc/mtcnn</li>
         <li>select out subset of images with attractive faces</li>
         <li>cGan stream</li>
         <li>vectorize images</li>
+</ol>
 </ol>
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
