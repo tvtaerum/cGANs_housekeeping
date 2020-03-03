@@ -54,11 +54,13 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   5.  how can I use embedding when I have descriptions of images?
   6.  how can I vectorize from generated face to generated face when using embedding?
   7.  what other adjustments might be applied?
-        a. selecting only faces with certain features (e.g. attractiveness)
-        b. adjusting for memory requirements
-        c. changing optimization from Adam to Adamax for embedding
-        d. shutting off Tensorflow warning messages
-        e. adding label to images
+<ol type="a">
+	<li>a. selecting only faces with certain features (e.g. attractiveness)</li>
+        <li>b. adjusting for memory requirements</li>
+        <li>c. changing optimization from Adam to Adamax for embedding</li>
+        <li>d. shutting off Tensorflow warning messages</li>
+        <li>e. adding label to images</li>
+</ol>
   8.  cGan stream:
         a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
         b. create face shots from images using https://github.com/ipazc/mtcnn
