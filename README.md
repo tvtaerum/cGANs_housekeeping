@@ -299,7 +299,5 @@ def save_plot(examples, labels, epoch, n=10):
 #### d. cGan stream 
 #### e. vectorize images
 
-LICENSE
-
-<a href="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/">MIT license</a>
+LICENSE  <a href="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/LICENSE">MIT license</a>
 
