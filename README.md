@@ -298,3 +298,8 @@ def save_plot(examples, labels, epoch, n=10):
 #### c. select out subset of images with attractive faces and compress
 #### d. cGan stream 
 #### e. vectorize images
+
+LICENSE
+<p align="center">
+<img src="LICENSE" width="650" height="500">
+</p>
