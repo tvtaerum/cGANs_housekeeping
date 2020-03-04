@@ -235,8 +235,12 @@ Going from left to right, we see the face on the left morphing into the face on 
 From an analytical perspective, comparing row 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are looking only at size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
+
+There are a number of other adjustments were made in order with the hope of improving results.  
+
 #### a. only selecting faces with certain characteristics - such as attractiveness
  
+Only faces identified as being attractive were included - it appeared to be a good way to select out those faces which were complete.  
 ```Python
 	# enumerate files
 	for idx, filename in enumerate(listdir(directory)):
@@ -250,6 +254,8 @@ From an analytical perspective, comparing row 4 (embedded value 2: attractive fe
 			continue
 ```
 #### b. adjusting for memory requirements
+
+In order to reduce the memory load, it was necessary to the size of the batch loads (reducing n_batch from 128 to 64).  
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
@@ -257,10 +263,13 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
 ```
 #### c. changing optimization from Adam to Adamax for embedding
+
+While Adam optimizers are generally the best option, it appears that GANs with embedding are best optimized with Adamax.  
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
 #### d. shutting off Tensorflow warnings
+One of the great aspects of Tensorflow is it is very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriate.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  Being able to shut off useful warnings can be helpful.  
 ```Python
 qErrorHide = True
 if qErrorHide:
@@ -268,6 +277,7 @@ if qErrorHide:
     log().setLevel('ERROR')
 ```
 #### e. adding label to the images 
+In order to best evaluate results, it is helpful to have a label stamped on an image.  
 ```Python
 def save_plot(examples, labels, epoch, n=10):
 	examples = (examples + 1) / 2.0
