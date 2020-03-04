@@ -76,11 +76,11 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 
 <p align="center">
-<img src="/images/escapingModeCollapse.png" width="850" height="275">
+<img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
 
 <p>
-	
+We can see in the image above three kinds of results.  The first set of results illustrates a recovery from model collapse.  
 </p>
 
 ```Python
