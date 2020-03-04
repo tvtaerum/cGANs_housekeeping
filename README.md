@@ -296,7 +296,9 @@ def save_plot(examples, labels, epoch, n=10):
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. create face shots from images using https://github.com/ipazc/mtcnn
 #### c. select out subset of images with attractive faces and compress
+https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_convert_mtcnn_attractive_faces.py
 #### d. cGan stream 
+
 #### e. vectorize images
 
 LICENSE  <a href="/LICENSE">MIT license</a>
