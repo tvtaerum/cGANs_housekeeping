@@ -28,7 +28,7 @@ As such, while good tutorials make coding as bare bones as possible so that it's
   4.  a cGan Python program with embedding
   5.  a Python program which vectorizes image generated with embedding
 
-### Limitations:
+### Limitations and caveates:
 
   1.  stream:  refers to the overall process of streaming/moving data through input, algorithms, and output of data and its evaluation.
   2.  convergence:  since there are no unique solutions in GAN, convergence is sufficient when there are no apparent improvements in a subjective evaluation of clarity of images being generated.   
@@ -73,14 +73,20 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 </ol>
 
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
-Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
+Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  The screen shot below illustrates 1. recovery from "mode collapse", 2. the estimate of real and fake "accuracy", and 3. generated images from the first epoch.   
+
+The screen shot requires some explanation.  The first indicates which epoch the stream is in divided by the maximum epochs possible in this particular run (e.g. 1/100).  The second column indicates the iteration the run at (e.g. 124/781).  The next three columns report loss for discriminator, generator, and gan (d1, d2, g).  Column 6 is the time in seconds since the start or restart; column 7 is how many times a restart has occurred, coluumn 8
+
+| Column | measure | example |
+|--------|---------|---------|
+|   1    | epoch/max_epochs | 1/100   |
 
 <p align="center">
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
 
 <p>
-We can see in the image above three kinds of results.  The first set of results illustrates a recovery from model collapse.  
+The results (labelled 1) illustrates a recovery from mode collapse.  We see 
 </p>
 
 ```Python
