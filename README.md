@@ -301,5 +301,5 @@ def save_plot(examples, labels, epoch, n=10):
 
 LICENSE
 <p align="center">
-https://github.com/tvtaerum/mtcnn/blob/master/LICENSE
+https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/LICENSE
 </p>
