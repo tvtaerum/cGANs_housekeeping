@@ -301,5 +301,5 @@ def save_plot(examples, labels, epoch, n=10):
 
 LICENSE
 <p align="center">
-<img src="LICENSE" width="650" height="500">
+<url="https://github.com/tvtaerum/mtcnn/blob/master/LICENSE">
 </p>
