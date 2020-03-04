@@ -75,7 +75,7 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  The screen shot below illustrates 1. recovery from "mode collapse", 2. the estimate of real and fake "accuracy", and 3. generated images from the first epoch.   
 
-The screen shot requires some explanation:
+Before examining the screen shot which comes below, the measures used to determine when a recovery is necessary follow:
 <table style="width:100%">
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
   <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
@@ -92,7 +92,7 @@ The screen shot requires some explanation:
 <p align="center">
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
-There are three parts to the screen shot.  In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and the gan loss would escalate to a very high number (mode collapse).  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
+In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and the gan loss would escalate to a very high number (mode collapse).  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
 In section 2, we see proof of recovery with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  
 In section 3, we see a screen shot of the generated faces from epoch 1 out of 100 epoches.  
 <p>
