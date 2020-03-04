@@ -6,7 +6,7 @@ In particular I thank Jason Brownlee for his brilliant work and tutorials at htt
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
-<img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/CliffDwellerHuts.png" width="650" height="280">
+<img src="/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
 In particular, the user may not have enough memory to use the code 'out of the box', it may take 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the stream may be unable to start from where it left off, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
 </p>
@@ -76,10 +76,6 @@ As such, while good tutorials make coding as bare bones as possible so that it's
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  
 
 <p align="center">
-<img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/escapingModeCollapse.png" width="650" height="500">
-</p>
-
-<p align="center">
 <img src="/images/escapingModeCollapse.png" width="650" height="500">
 </p>
 
@@ -105,7 +101,7 @@ What happens then is discriminator, generator, and gan weights are collected whe
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before discovering I needed to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  
 <p align="center">
-<img src="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/images/improvedImagesOverEpochs.png" width="650" height="500">
+<img src="/images/improvedImagesOverEpochs.png" width="650" height="500">
 </p>
   
 The previous images illustrate observed improvement over epochs.  The numbers on the left side are epochs required to produce the observed results.  We can see the faint images of faces by epoch 5, good outlines of faces by epoch 45, details of faces by epoch 165 and small improvements by epoch 205.  We want to do better than being stuck at epoch 45 and we want to be able to continue from epoch 45 if the process is interrupted.  We are mapping from a 100-dimensional space to images of faces - it takes time to complete the mapping from representative parts of the 100-dimensional space.      
