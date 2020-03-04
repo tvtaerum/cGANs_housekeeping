@@ -300,6 +300,6 @@ def save_plot(examples, labels, epoch, n=10):
 #### e. vectorize images
 
 LICENSE
-<p align="center">
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/LICENSE
-</p>
+
+<a href="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/LICENSE" </a>
+
