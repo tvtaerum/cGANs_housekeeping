@@ -92,14 +92,14 @@ Before examining the screen shot which comes below, the measures used to determi
 <p align="center">
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
+
 In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and the gan loss would escalate to a very high number (mode collapse).  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
-In section 2, we see proof of recovery with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  
+
+In section 2, we see proof of recovery at the end of epoch 1 with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  These values many not sound impessive until we look at the generated faces from epoch 1.
+
 In section 3, we see a screen shot of the generated faces from epoch 1 out of 100 epoches.  
-<p>
-The results (labelled 1) illustrates a recovery from mode collapse.  We see 
-	
-So how can we recover from a mode collapse.  
-</p>
+
+So how can we recover from a mode collapse.  The syntax below illustrates the core of the process:  
 
 ```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
@@ -112,9 +112,19 @@ So how can we recover from a mode collapse.
 			print("RELOADING gan_models weights",j+1," from ",ijSave)
 			gan_model.set_weights(gan_trainable_weights)
 ```
-It is apparent there is a relationship between model loss and mode collapse.  The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  It depends on having captured disciminator weights, generator weights, and gan weights either during initialization or later in the process when all model losses are within bounds.  The definition of model loss bounds are arbitrary but reflect expert opinion about when losses are what might be expected and when they are clearly much too high or much too low.  Reasonable discriminator and generator losses are between 0.1 and 1.0, and their arbitrary bounds are set to between 0.001 and 2.0.  Reasonable gan losses are between 0.2 and 2.0 and their arbitrary bounds are set to 0.01 and 4.5.  
+The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  It depends on having captured disciminator weights, generator weights, and gan weights either during initialization or later in the process when all model losses are within bounds.  The definition of model loss bounds are arbitrary but reflect expert opinion about when losses are what might be expected and when they are clearly much too high or much too low.  Reasonable discriminator and generator losses are between 0.1 and 1.0, and their arbitrary bounds are set to between 0.001 and 2.0.  Reasonable gan losses are between 0.2 and 2.0 and their arbitrary bounds are set to 0.01 and 4.5.  
 
-What happens then is discriminator, generator, and gan weights are collected when all three losses are "reasonable".  When an individual model's loss goes out of bounds, then the last collected weights for that particular model (and only that model) are replaced, leaving the other model weights are they are, and the process moves forward.  The process stops when mode collapse appears to be unavoidable even when model weights are replaced.  This is identified when a particular set of model weights continue to be reused but repeatedly result in out of bound model losses.    
+What happens then is discriminator, generator, and gan weights are collected when all three losses are "reasonable".  When an individual model's loss goes out of bounds, then the last collected weights for that particular model (and only that model) are replaced, leaving the other model weights are they are, and the process moves forward.  The process stops when mode collapse appears to be unavoidable even when model weights are replaced.  This is identified when a particular set of model weights continue to be reused but repeatedly result in out of bound model losses.   
+
+The programming fragment for saving the weights are:
+
+```Python
+	if d_loss1 > 0.30 and d_loss1 < 0.95 and d_loss2 > 0.25 and d_loss2 < 0.95 and g_loss > 0.40 and g_loss < 1.50:
+		d_trainable_weights = np.array(d_model.get_weights())
+		g_trainable_weights = np.array(g_model.get_weights())
+		gan_trainable_weights = np.array(gan_model.get_weights())
+```
+Needless to say, there are a few additional requirements which can be found in the final stream available at the end of the project.  For instance, if your stream goes into mode collapse just after saving your trainable weights, you don't want to reuse the most recently saved weights.  
 
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before discovering I needed to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  
