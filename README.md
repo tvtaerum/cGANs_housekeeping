@@ -77,21 +77,17 @@ Even with reasonable learning rates, convergence can slide into "mode collapse" 
 
 The screen shot requires some explanation.  The first indicates which epoch the stream is in divided by the maximum epochs possible in this particular run (e.g. 1/100).  The second column indicates the iteration the run at (e.g. 124/781).  The next three columns report loss for discriminator, generator, and gan (d1, d2, g).  Column 6 is the time in seconds since the start or restart; column 7 is how many times a restart has occurred, coluumn 8
 
-| Column | measure | example |
-|--------|---------|---------|
-|   1    | epoch/max_epochs | 1/100   |
-
 <table style="width:100%">
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
   <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 2 </td>  <td> iteration/max_iterations  </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 4 </td>  <td> generator loss </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 5 </td>  <td> gan loss </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 6 </td>  <td> run time (seconds) </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 7 </td>  <td> number of restarts </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> 1/100 </td>  </tr>
-  <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 2 </td>  <td> iteration/max_iterations  </td>    <td> 125/781 </td>  </tr>
+  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> 0.020 </td>  </tr>
+  <tr> <td> 4 </td>  <td> generator loss </td>    <td> 0.114 </td>  </tr>
+  <tr> <td> 5 </td>  <td> gan loss </td>    <td> 2.368 </td>  </tr>
+  <tr> <td> 6 </td>  <td> run time (seconds) </td>   <td> 142 </td>  </tr>
+  <tr> <td> 7 </td>  <td> number of restarts </td>    <td> 0 </td>  </tr>
+  <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> 0 </td>  </tr>
+  <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> 2 </td>  </tr>
 </table>
 
 <p align="center">
