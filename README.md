@@ -81,13 +81,13 @@ The screen shot requires some explanation.  The first indicates which epoch the 
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
   <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
   <tr> <td> 2 </td>  <td> iteration/max_iterations  </td>    <td> 125/781 </td>  </tr>
-  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> 0.020 </td>  </tr>
-  <tr> <td> 4 </td>  <td> generator loss </td>    <td> 0.114 </td>  </tr>
-  <tr> <td> 5 </td>  <td> gan loss </td>    <td> 2.368 </td>  </tr>
-  <tr> <td> 6 </td>  <td> run time (seconds) </td>   <td> 142 </td>  </tr>
-  <tr> <td> 7 </td>  <td> number of restarts </td>    <td> 0 </td>  </tr>
-  <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> 0 </td>  </tr>
-  <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> 2 </td>  </tr>
+  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> d1=0.020 </td>  </tr>
+  <tr> <td> 4 </td>  <td> generator loss </td>    <td> d2=0.114 </td>  </tr>
+  <tr> <td> 5 </td>  <td> gan loss </td>    <td> g=2.368 </td>  </tr>
+  <tr> <td> 6 </td>  <td> run time (seconds) </td>   <td> secs=142 </td>  </tr>
+  <tr> <td> 7 </td>  <td> number of restarts </td>    <td> tryAgain=0 </td>  </tr>
+  <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> nTripsOnSameSavedWts=0 </td>  </tr>
+  <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> nSaves=2 </td>  </tr>
 </table>
 
 <p align="center">
