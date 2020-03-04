@@ -81,6 +81,12 @@ The screen shot requires some explanation.  The first indicates which epoch the 
 |--------|---------|---------|
 |   1    | epoch/max_epochs | 1/100   |
 
+<style>
+table, th, td {
+  border: 3px solid black;
+}
+</style>
+
 <table style="width:100%">
   <tr>
     <th>Firstname</th>
