@@ -82,10 +82,16 @@ The screen shot requires some explanation.  The first indicates which epoch the 
 |   1    | epoch/max_epochs | 1/100   |
 
 <table style="width:100%">
-  <tr>    <th>Firstname</th>    <th>Lastname</th>     <th>Age</th>  </tr>
-  <tr>    <td>Jill</td>    <td>Smith</td>    <td>50</td>  </tr>
-  <tr>    <td>Eve</td>    <td>Jackson</td>    <td>94</td>  </tr>
-  <tr>    <td>John</td>    <td>Doe</td>    <td>80</td>  </tr>
+  <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
+  <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 2 </td>  <td> iteration/max_iterations  </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 4 </td>  <td> generator loss </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 5 </td>  <td> gan loss </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 6 </td>  <td> run time (seconds) </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 7 </td>  <td> number of restarts </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> 1/100 </td>  </tr>
+  <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> 1/100 </td>  </tr>
 </table>
 
 <p align="center">
