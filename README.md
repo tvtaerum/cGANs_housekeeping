@@ -301,3 +301,4 @@ def save_plot(examples, labels, epoch, n=10):
 
 LICENSE  <a href="https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/LICENSE">MIT license</a>
 
+LICENSE  <a href="/LICENSE">MIT license</a>
