@@ -1,17 +1,17 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they ran 'out of the box' and they do a wonderful job of explaining why their streams work.  This should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  This description which follows might be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
 <img src="/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
-In particular, the user may not have enough memory to use the code 'out of the box', it may take 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the stream may be unable to start from where it left off, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
+In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the stream may be unable to start from where it left off, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
 </p>
 
-As such, while good tutorials make coding as bare bones as possible so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that they're, hopefully, able to carry on in spite of small obstacles.    
+In the face of so many constraints and the ease with which GANs slide into mode collapse, it can be particularly difficult for the novice (like myself) to make tutorial material work.  While good tutorials make coding as bare bones as possible and adhere as closely as possible to industrial standards so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that the novice, after they've made the essential changes required by their limited environment, will have a better chance of replicating the work done by those more expert in the field.      
 
 ### Citations:
 <dl>
@@ -209,7 +209,7 @@ There are four kinds of embedding and the identity of the embedding (0 thru 3) i
 Jeff Brownlee provides a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictiver value of the features through embedding as described in section 5. 
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
-Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding is identical.  
+Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings/labels.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding/label is identical.  
 
 From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans actually identifies what is uniquely different in comparing rows three and four.  
 
@@ -234,11 +234,11 @@ The programming fragment illustrates that for each embedded label, the generated
 
 ### 7.  other changes that can be applied?
 
-There are a number of other adjustments were made in order with the hope of improving results.  
+There are a number of other adjustments which were made in order with the hope of improving results.  
 
 #### a. only selecting faces with certain characteristics - such as attractiveness
  
-Only faces identified as being attractive were included - it appeared to be a good way to select out those faces which were complete.  
+Only faces identified as being attractive were included.  Given the attributes associated with attractiveness, such as symmetry, it appeared to be a good way to select out those faces which were complete.  
 ```Python
 	# enumerate files
 	for idx, filename in enumerate(listdir(directory)):
@@ -253,7 +253,7 @@ Only faces identified as being attractive were included - it appeared to be a go
 ```
 #### b. adjusting for memory requirements
 
-One of the most frequent modifications novices have to face is adjusting batch sizes in order to fit the problem onto their GPU.  In this particular case, the fork required a change of n_batch from 128 to 64.  
+Based on my own experiences, I'd surmise that one of the most frequent modifications novices have to make is making adustments so that the problem will fit onto their GPU.  In many circumstances, this is done by adjusting batch sizes.  In this particular case, the fork required a change of n_batch from 128 to 64.  
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
@@ -269,7 +269,7 @@ While Adam optimizers are generally the best option, GANs with embedding are bes
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
 #### d. shutting off Tensorflow warnings
-One of the great aspects of Tensorflow is it is very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriate.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  Being able to shut off useful warnings can be helpful.  
+Tensorflow and Keras are both very at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriately matched.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
 ```Python
 qErrorHide = True
 if qErrorHide:
@@ -277,7 +277,7 @@ if qErrorHide:
     log().setLevel('ERROR')
 ```
 #### e. adding label to the images 
-In order to best evaluate results, it is helpful to have a label stamped on an image.  
+Finally, it's helpful if the image has a label stamped on it so you can see, at a glance, whether or not the embedding matches what you believe ought to be features of the generated image.  
 ```Python
 def save_plot(examples, labels, epoch, n=10):
 	examples = (examples + 1) / 2.0
@@ -293,6 +293,7 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan stream:
+The following is an outline of the programming steps required to replicate the results, and the code used to create the results along with programming fragments.  
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. create face shots from images using https://github.com/ipazc/mtcnn
 #### c. select out subset of images with attractive faces and compress
