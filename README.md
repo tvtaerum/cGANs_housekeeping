@@ -1,7 +1,7 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who I am very impressed with but they are the source of insights for this presentation. The description which follows should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
@@ -160,8 +160,8 @@ And when loading:
 ```
 Setting the layers on an individual basis may seem overly detailed but it is a reminder that, in some circumstances, there are layers which need to be set to trainable-False.     
 
-### 3.  are there non-random initialization values that can be useful?
-While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning centroid values as opposed to values at the upper and lower extremes.   
+### 3.  are there different kinds of random initialization processes that can be helpful in accelerating convergence?
+While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a bounded 100-dimensional space.   
 ```Python
 def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 	# print("generate_latent_points: ", latent_dim, n_samples)
@@ -178,7 +178,7 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 		labels = np.where((randx >= cumProbs[i]) & (randx < cumProbs[i+1]), i, labels)
 	return [z_input, labels]
 ```
-Substantially, the routine divides the range of values from -3.0 to +3.0 into equal intervals and then randomizes the values by a shuffle.  
+Substantially, the routine divides the range of values from -3.0 to +3.0 into equal intervals and then randomizes the values by a shuffle.  The process works - I'm still examining whether it accelerates convergence with images.  
  
 ### 4.  how important is the source material (original images of faces)?
 In my attempts to improve the results of the generations, I managed to overlook a critical factor - what does the data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
@@ -189,6 +189,8 @@ The code to examine the data going into the cGAN is trivial and is included in t
 
 It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  
 ![real faces](images/sampleRealImages.png)
+
+In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only facces featured as attractive to begin with may have aided in obtaining results which had considerable clarity.  
 
 ### 5.  how can I use embedding when I have descriptions of images?
 There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, selecting a particular gender, and having facial features such as high cheek bones and large lips.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  In this example, we could enter in the attributes:  attractive, female, high cheek bones, and large lips.  
@@ -230,7 +232,7 @@ From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attrac
                         results = vstack((results, X))   # stack the images for display
             plot_generated(filename, results, labels_input, 10, n_samples, n_classes)   #generate plot
 ```
-The programming fragment illustrates that for each embedded label, the generated latent points are identical but the generated images are different.  The effect of label information is most clearly illustrated when we compare row 2 (males) and row 3 (females with high cheek bones).  
+The programming fragment illustrates the effect of embedding, where the generated latent points are identical but the embedded labels are different - resulting in generated images which are marketly different.  The effect of label information is most clearly illustrated when we compare row 2 (males) and row 3 (females with high cheek dones).  
 
 ### 7.  other changes that can be applied?
 
@@ -269,7 +271,7 @@ While Adam optimizers are generally the best option, GANs with embedding are bes
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
 #### d. shutting off Tensorflow warnings
-Tensorflow and Keras are both very at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriately matched.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
+Tensorflow and Keras are both very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriately matched.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
 ```Python
 qErrorHide = True
 if qErrorHide:
