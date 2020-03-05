@@ -210,6 +210,8 @@ Jeff Brownlee provides a brilliant example of how to vectorize from one face to 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding is identical.  
 
+INSERT CODE&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans actually identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
@@ -233,13 +235,15 @@ Only faces identified as being attractive were included - it appeared to be a go
 ```
 #### b. adjusting for memory requirements
 
-One of the most frequent modifications novices have to face is adjusting batch sizes in order to fit the problem onto their GPU.  In this particular case, the fork required a change of n_batch from 128 to 64.    
+One of the most frequent modifications novices have to face is adjusting batch sizes in order to fit the problem onto their GPU.  In this particular case, the fork required a change of n_batch from 128 to 64.  
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 ...
 train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
 ```
+While the change is trivial, it often has unexpected outcomes which result in mode collapse.  
+
 #### c. changing optimization from Adam to Adamax for embedding
 
 While Adam optimizers are generally the best option, GANs with embedding are best optimized with Adamax.  
