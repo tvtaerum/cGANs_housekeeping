@@ -183,11 +183,11 @@ Substantially, the routine divides the range of values from -3.0 to +3.0 into eq
 ### 4.  how important is the source material (original images of faces)?
 In my attempts to improve the results of the generations, I managed to overlook a critical factor - what does the data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
 
-The code to examine the data going into the cGAN is trivial and is included in the final stream but the faces are worth examining.  
+The code to examine the data going into the cGAN is trivial and is included in the final stream.  
 
 ![real faces rows](images/sampleRealImagesRows.png)
 
-When we look at the transformed images going into the analysis in detail, we can see effects due to pixelation.  
+It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  
 ![real faces](images/sampleRealImages.png)
 
 ### 5.  how can I use embedding when I have descriptions of images?
