@@ -134,11 +134,11 @@ There is nothing quite as upsetting as running a stream and six days later the p
   
 The numbers on the left side are epochs required to produce the observed results.  We can see the faint images of faces by epoch 5, good impressions of faces by epoch 45, details of faces by epoch 165 and small improvements by epoch 205.  We want to do better than being stuck at epoch 45 and we want to be able to continue from epoch 45 if the process is interrupted.  We are, in a sense, mapping from a 100-dimensional space to images of faces - it takes time to complete the mapping from representative parts of the 100-dimensional space.      
     
-Needless to say, the steam needs to be prepared for interruptions.  Even with preparation, attempts to restart can result in warnings about parameters being not trainable, dimensions of weights being wrong for discriminate, generative, and gan models, and optimizations that collapse.  There is a lot of helpful advice if you just want to inspect weights but after six days, you want to start where you left off - how do you do it?  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. If you only interest is in examining weights and optimization, then warning messages can often be ignored.  If you wish to restart from where you left off, then you ignore warning messages at considerable risk.   
+Needless to say, the steam needs to be prepared for interruptions.  Even with preparation, attempts to restart can result in warnings about model and/or layers being trainable=False, dimensions of weights being different for discriminate, generative, and gan models, and optimizations that collapse.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. If your only interest is in examining weights and optimization, then warning messages can often be ignored.  If you wish to restart from where you left off, then you ignore warning messages at considerable risk.   
  
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to constrain the make the discriminator and generator work together.  
  
-Restarting a cGAN requires saving models and their optimizations in case they are required.  When saving a model, the layers that get saved are those which are trainable.  It's worth recalling that the discriminator model is set to trainable=False within the gan model.  Depending on the requirements, there may even be layers which are set to trainable=False.  In order to save the models, and recover the fixed weighty, the weights must temporarily set to trainable=True.  The following code fragment is required when saving the discriminator model:  
+Restarting a cGAN requires saving models and their optimizations in case they are required after each epoch.  When saving a model, the layers that get saved are those which are trainable.  It's worth recalling that the discriminator model is set to trainable=False within the gan model.  Depending on the requirements, there may also be layers which are set to trainable=False.  In order to save the models, and recover the fixed weights, the weights must temporarily be set to trainable=True.  The following code fragment is required when saving the discriminator model:  
 ```Python
 	filename = 'celeb/results/generator_model_dis%03d.h5' % (epoch+1)
 	d_model.trainable = True
@@ -158,10 +158,10 @@ And when loading:
 		layer.trainable = True
 	d_model.summary()
 ```
-Matters are made slightly more complicated if I want to be able to make the embedding layers trainable=False once training is complete but add other images to the training.    
+Setting the layers on an individual basis may seem overly detailed but it is a reminder that, in some circumstances, there are layers which need to be set to trainable-False.     
 
 ### 3.  are there non-random initialization values that can be useful?
-I have found no reason to believe that normal like distributions of random values are better than uniform distributions of random values.  A small investigation on that issue indicated that leptokurtic distributions were poorest in generating good images.  In general statistical analysis using normal distributions, those values which are furthest away from the centroid provide the greatest amount of information.  Do we really believe this when generating images?  For most of the results discussed here, I use a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning centroid values as opposed to values at the upper and lower extremes.   
+While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a bounded 100-dimensional space and there is no reason that I am aware of for fine tuning centroid values as opposed to values at the upper and lower extremes.   
 ```Python
 def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 	# print("generate_latent_points: ", latent_dim, n_samples)
@@ -178,42 +178,20 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 		labels = np.where((randx >= cumProbs[i]) & (randx < cumProbs[i+1]), i, labels)
 	return [z_input, labels]
 ```
+Substantially, the routine divides the range of values from -3.0 to +3.0 into equal intervals and then randomizes the values by a shuffle.  
  
 ### 4.  how important is the source material (original images of faces)?
-There is a well known acronym GIGO (garbage in, garbage out), and no one is surprised by words of advice to examine the data going into the stream.  When the data going into a stream is a derivative of another process, as in this case, it is important to examine the quality of the input data before declaring a process to be useful or invalid.  
+In my attempts to improve the results of the generations, I managed to overlook a critical factor - what does the data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
 
-It is easy to forget to examine the transformed data that goes into an analysis, no matter what the subject matter of the analysis is.
+The code to examine the data going into the cGAN is trivial and is included in the final stream but the faces are worth examining.  
 
 ![real faces rows](images/sampleRealImagesRows.png)
 
-```Python
-def save_real_plots(dataset, nRealPlots = 5, n=10, n_samples=100):
-	# plot images
-	for epoch in range(nRealPlots):
-		if epoch%5==0:
-			print("real_plots: ", epoch)
-		# prepare real samples
-		[X_real, labels], y_real = generate_real_samples(dataset, n_samples)
-		# scale from [-1,1] to [0,1]
-		X_real = (X_real + 1) / 2.0
-		for i in range(n * n):
-			# define subplot
-			fig = plt.subplot(n, n, 1 + i)
-			strLabel = str(labels[i])
-			fig.axis('off')
-			fig.text(8.0,20.0,strLabel, fontsize=6, color='white')
-			# plot raw pixel data
-			fig.imshow(X_real[i])
-		# save plot to file
-		filename = 'celeb/real_plots/real_plot_e%03d.png' % (epoch+1)
-		plt.savefig(filename)
-		plt.close()
-```
 When we look at the transformed images going into the analysis in detail, we can see effects due to pixelation.  
 ![real faces](images/sampleRealImages.png)
 
 ### 5.  how can I use embedding when I have descriptions of images?
-There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, male or female, having high cheek bones, large lips, and other features.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  
+There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, selecting a particular gender, and having facial features such as high cheek bones and large lips.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  In this example, we could enter in the attributes:  attractive, female, high cheek bones, and large lips.  
 
 There were three parts to this process:  
 1. selecting a subset of faces (only those identified as being "attractive"):
@@ -223,7 +201,7 @@ Details of the process are discussed in section 7.
       b. 1 = featured as being attractive and male
       c. 2 = featured as being attractive and not male and high cheek bone
       d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
-3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with a image.  
+3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 As you can see, there are four kinds of embedding and the identity of the embedding (from 0 to 4) is included in the generated face. In many ways, those faces identified as being 0 are "featureless".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  To be clear, embedding does NOT refer to the cardinal number being included in the image - those labels are added when creating the image.  Explanations for what we found is discussed in section 6.  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
