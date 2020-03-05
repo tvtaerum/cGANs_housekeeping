@@ -124,10 +124,10 @@ The programming fragment for saving the weights are:
 		g_trainable_weights = np.array(g_model.get_weights())
 		gan_trainable_weights = np.array(gan_model.get_weights())
 ```
-Needless to say, there are a few additional requirements which can be found in the final stream available at the end of the project.  For instance, if your stream goes into mode collapse just after saving your trainable weights, you don't want to reuse the most recently saved weights.  
+Needless to say, there are a few additional requirements which can be found in the stream available at the end of the project.  For instance, if your stream goes into mode collapse just after saving your trainable weights, you don't want to reuse the most recently saved weights.  
 
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
-There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before discovering I needed to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  The images which follow illustrate easily observed improvements over epochs.  
+There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before something goes wrong and I am unable to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  The images which follow illustrate easily observed improvements over epochs.  
 <p align="center">
 <img src="/images/improvedImagesOverEpochs.png" width="650" height="500">
 </p>
