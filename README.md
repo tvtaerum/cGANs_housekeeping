@@ -60,7 +60,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
         <li>adjusting for memory requirements</li>
         <li>changing optimization from Adam to Adamax for embedding</li>
         <li>shutting off Tensorflow warning messages</li>
-        <li>adding label to images</li>
+        <li>stamping labels on images</li>
 </ol>
   <li>cGan stream:
 <ol type="a">        
@@ -276,7 +276,7 @@ if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
 ```
-#### e. adding label to the images 
+#### e. stamping labels on images 
 Finally, it's helpful if the image has a label stamped on it so you can see, at a glance, whether or not the embedding matches what you believe ought to be features of the generated image.  
 ```Python
 def save_plot(examples, labels, epoch, n=10):
