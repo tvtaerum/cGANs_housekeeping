@@ -298,8 +298,8 @@ def save_plot(examples, labels, epoch, n=10):
 #### c. select out subset of images with attractive faces and compress
 <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
 #### d. cGan stream 
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/edit/master/files/tutorial_latent_space_embedding_cgan.py
+<a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 #### e. vectorize images
-https://github.com/tvtaerum/cGANs_with_embedding---housekeeping/blob/master/files/images_run_thru_models_1_restart_cgan.py
+<a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a>
 
 LICENSE  <a href="/LICENSE">MIT license</a>
