@@ -1,7 +1,7 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they ran 'out of the box' and they do a wonderful job of explaining why their streams work.  This should be considered a branch of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  I found their code work to be complete, except for system related issues they ran 'out of the box' and they do a wonderful job of explaining why their streams work.  This should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
@@ -204,15 +204,33 @@ Details of the process are discussed in section 7.
 3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 There are four kinds of embedding and the identity of the embedding (0 thru 3) is included in the generated face. In many ways, those faces identified as being 0 are "female without high cheeck bones and without large lips".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  The labels (0 thru 3) are added when creating the image.  Explanations for what we found is discussed in section 6.  
+
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
 Jeff Brownlee provides a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictiver value of the features through embedding as described in section 5. 
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding is identical.  
 
-INSERT CODE&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-
 From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans actually identifies what is uniquely different in comparing rows three and four.  
+
+```Python
+            n_classes = 4     
+            latent_dim = 100                  # 100 dimensional space
+            pts, labels_input = generate_latent_points(latent_dim, n_samples, cumProbs)
+            results = None
+            for i in range(n_samples):        # interpolate points in latent space
+                interpolated = interpolate_points(pts[2*i], pts[2*i+1])
+                for j in range(n_classes):    # run each class (embedding label)
+                    labels = np.ones(10,dtype=int)*j
+                    X = model.predict([interpolated, labels])  # predict image based on latent points & label
+                    X = (X + 1) / 2.0         # scale from [-1,1] to [0,1]
+                    if results is None:
+                        results = X
+                    else:
+                        results = vstack((results, X))   # stack the images for display
+            plot_generated(filename, results, labels_input, 10, n_samples, n_classes)   #generate plot
+```
+The programming fragment illustrates that for each embedded label, the generated latent points are identical but the generated images are different.  The effect of label information is most clearly illustrated when we compare row 2 (males) and row 3 (females with high cheek bones).  
 
 ### 7.  other changes that can be applied?
 
