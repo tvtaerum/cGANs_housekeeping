@@ -1,7 +1,7 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally find programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows can be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
@@ -238,7 +238,7 @@ The programming fragment illustrates the effect of embedding, where the generate
 
 There are a number of other adjustments which were made in order with the hope of improving results.  
 
-#### a. only selecting faces with certain characteristics - such as attractiveness
+#### a. select faces with certain characteristics - such as attractiveness - for analysis
  
 Only faces identified as being attractive were included.  Given the attributes associated with attractiveness, such as symmetry, it appeared to be a good way to select out those faces which were complete.  
 ```Python
@@ -253,7 +253,7 @@ Only faces identified as being attractive were included.  Given the attributes a
 		if data_attractive[idx] == -1.0:
 			continue
 ```
-#### b. adjusting for memory requirements
+#### b. adjust for memory requirements
 
 Based on my own experiences, I'd surmise that one of the most frequent modifications novices have to make is making adustments so that the problem will fit onto their GPU.  In many circumstances, this is done by adjusting batch sizes.  In this particular case, the fork required a change of n_batch from 128 to 64.  
 ```Python
@@ -264,13 +264,13 @@ train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_ba
 ```
 While the change is trivial, it often has unexpected outcomes which result in mode collapse.  
 
-#### c. changing optimization from Adam to Adamax for embedding
+#### c. change optimization from Adam to Adamax for embedding
 
 While Adam optimizers are generally the best option, GANs with embedding are best optimized with Adamax.  
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
-#### d. shutting off Tensorflow warnings
+#### d. turn off Tensorflow warnings for debugging purposes
 Tensorflow and Keras are both very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriately matched.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
 ```Python
 qErrorHide = True
@@ -278,7 +278,7 @@ if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
 ```
-#### e. stamping labels on images 
+#### e. stamp labels on images 
 Finally, it's helpful if the image has a label stamped on it so you can see, at a glance, whether or not the embedding matches what you believe ought to be features of the generated image.  
 ```Python
 def save_plot(examples, labels, epoch, n=10):
@@ -294,8 +294,8 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.savefig(filename)
 	plt.close()
 ```
-###  8.  cGan stream:
-The following is an outline of the programming steps required to replicate the results, and the code used to create the results along with programming fragments.  
+###  8.  cGan streams and data sources:
+The following is an outline of the programming steps and Python code used to create the results observed in this repository.    
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. create face shots from images using https://github.com/ipazc/mtcnn
 #### c. select out subset of images with attractive faces and compress
