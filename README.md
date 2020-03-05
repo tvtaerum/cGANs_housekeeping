@@ -1,17 +1,17 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  This description which follows might be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally land on a group of programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who I am very impressed with but they are the source of insights for this presentation. The description which follows should be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
-Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes result in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
+Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
 <img src="/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
-In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the stream may be unable to start from where it left off, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
+In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
 </p>
 
-In the face of so many constraints and the ease with which GANs slide into mode collapse, it can be particularly difficult for the novice (like myself) to make tutorial material work.  While good tutorials make coding as bare bones as possible and adhere as closely as possible to industrial standards so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that the novice, after they've made the essential changes required by their limited environment, will have a better chance of replicating the work done by those more expert in the field.      
+In the face of so many constraints and the ease with which GANs slide into mode collapse, it can be particularly difficult for the novice (like myself) to make tutorial material work.  While good tutorials make coding as bare bones as possible and adhere as closely as possible to industrial standards so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that the novice, after they've made the essential changes required by their limited environment, will have a better chance of replicating the work done by those who are expert in the field.      
 
 ### Citations:
 <dl>
@@ -24,7 +24,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 ### Deliverables:
   1.  description of issues identified and resolved within specified limitations
   2.  code fragments illustrating the core of how the issue was resolved
-  3.  Python programs to prepare images for selection and training
+  3.  a Python program to prepare images for selection and training
   4.  a cGan Python program with embedding
   5.  a Python program which vectorizes image generated with embedding
 
@@ -45,7 +45,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 
 #### The process:
 
- Using a cGAN as illustration, I provide limited working solutions to the following problems:
+ Creating a cGAN as illustration, I provide limited working solutions to the following problems:
 
 <ol type="1">
   <li>is there an automatic way to recover before "mode collapse"?</li>
