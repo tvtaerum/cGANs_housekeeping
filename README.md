@@ -203,14 +203,14 @@ Details of the process are discussed in section 7.
       d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
 3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
-As you can see, there are four kinds of embedding and the identity of the embedding (from 0 to 4) is included in the generated face. In many ways, those faces identified as being 0 are "featureless".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  To be clear, embedding does NOT refer to the cardinal number being included in the image - those labels are added when creating the image.  Explanations for what we found is discussed in section 6.  
+There are four kinds of embedding and the identity of the embedding (0 thru 3) is included in the generated face. In many ways, those faces identified as being 0 are "female without high cheeck bones and without large lips".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  The labels (0 thru 3) are added when creating the image.  Explanations for what we found is discussed in section 6.  
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides what I believe is a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictiver value of the features through embedding as described in section 5. 
+Jeff Brownlee provides a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictiver value of the features through embedding as described in section 5. 
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
-Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). It's important to note that everything except the embedding is identical.  
+Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding is identical.  
 
-From an analytical perspective, comparing row 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are looking only at size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
+From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans actually identifies what is uniquely different in comparing rows three and four.  
 
 ### 7.  other changes that can be applied?
 
@@ -233,7 +233,7 @@ Only faces identified as being attractive were included - it appeared to be a go
 ```
 #### b. adjusting for memory requirements
 
-In order to reduce the memory load, it was necessary to the size of the batch loads (reducing n_batch from 128 to 64).  
+One of the most frequent modifications novices have to face is adjusting batch sizes in order to fit the problem onto their GPU.  In this particular case, the fork required a change of n_batch from 128 to 64.    
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
@@ -242,7 +242,7 @@ train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_ba
 ```
 #### c. changing optimization from Adam to Adamax for embedding
 
-While Adam optimizers are generally the best option, it appears that GANs with embedding are best optimized with Adamax.  
+While Adam optimizers are generally the best option, GANs with embedding are best optimized with Adamax.  
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
