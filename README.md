@@ -36,10 +36,10 @@ In the face of so many constraints and the ease with which GANs slide into mode 
   4.  bounds of model loss:  there is an apparent relationship between mode collapse and model loss - when model loss is extreme (too high or too low) then there is mode collapse.  
   
 ### Software and hardware requirements:
-    - Python
-        - Numpy
-        - Tensorflow with Keras
-        - Matplotlib
+    - Python version 3.7.3
+        - Numpy version 1.17.3
+        - Tensorflow with Keras version 2.0.0
+        - Matplotlib version 3.0.3
     - GPU is highly recommended
     - Operating system used for development and testing:  Windows 10
 
