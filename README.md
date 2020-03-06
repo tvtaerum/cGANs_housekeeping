@@ -93,7 +93,7 @@ There are three parts in the screen shots below:
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
 
-In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and we would see model collapse.  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
+In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and we would see mode collapse.  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
 
 In section 2, we see proof of recovery at the end of epoch 1 with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  These values many not sound impessive until we look at the generated faces from epoch 1.
 
