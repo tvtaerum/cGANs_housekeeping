@@ -321,15 +321,15 @@ The recommended folder structure looks as follows:
 		<li> <b>celeb</b></li>
 		<ul>
 			<li> <b>img_align_celeba</b> (contains about 202,599 images for data input)</li>
-	       <li> __real_plots__ (contains arrays of real images for inspection)</li>
-	       <li> __results__ (contains generated png images of faces and and h5 files for models saved by program)</li>
+			<li> <b>real_plots</b> (contains arrays of real images for inspection)</li>
+			<li> <b>results</b> (contains generated png images of faces and and h5 files for models saved by program)</li>
 		</ul>
-	   <li> __cgan__ (contains images from summary analysis of models)</li>
+		<li> <b>cgan</b> (contains images from summary analysis of models)</li>
 	</ul>
        <li> images (contains images for README file)</li>
 	</ul>
 </ul>
-Those folders which are in __bold___ need to be created. 
+Those folders which are in <b>bold</b> need to be created. 
 
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. select out subset of images with attractive faces and compress <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
