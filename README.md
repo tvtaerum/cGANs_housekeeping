@@ -315,6 +315,7 @@ The following is an outline of the programming steps and Python code used to cre
 The recommended folder structure looks as follows:
 <ul>
     <li>cGANs_housekeeping-master (or any folder name)</li>
+	<ul>
        <li> files (also contains Python programs)</li>
 	<ul>
            <li> __celeb__</li>
@@ -326,6 +327,7 @@ The recommended folder structure looks as follows:
 	   <li> __cgan__ (contains images from summary analysis of models)</li>
 	</ul>
        <li> images (contains images for README file)</li>
+	</ul>
 </ul>
 Those folders which are in __bold___ need to be created. 
 
