@@ -303,7 +303,7 @@ The following is an outline of the programming steps and Python code used to cre
 #### c. select out subset of images with attractive faces and compress
 <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
 
-When executing, you will get the following output.  
+When executing, you will get the following output:  
 <p align="left">
 <img src="/images/LoadingAndCompressing50000Images.png" width="200" height="100">
 </p>  
