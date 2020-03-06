@@ -80,9 +80,9 @@ Before examining the screen shot which comes below, I define the measures used t
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
   <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
   <tr> <td> 2 </td>  <td> iteration/max_iterations  </td>    <td> 125/781 </td>  </tr>
-  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> d1=0.020 </td>  </tr>
-  <tr> <td> 4 </td>  <td> generator loss </td>    <td> d2=0.114 </td>  </tr>
-  <tr> <td> 5 </td>  <td> gan loss </td>    <td> g=2.368 </td>  </tr>
+  <tr> <td> 3 </td>  <td> discriminator loss </td>    <td> d1(dis)=0.020 </td>  </tr>
+  <tr> <td> 4 </td>  <td> generator loss </td>    <td> d2(gen)=0.114 </td>  </tr>
+  <tr> <td> 5 </td>  <td> gan loss </td>    <td> g(gan)=2.368 </td>  </tr>
   <tr> <td> 6 </td>  <td> run time (seconds) </td>   <td> secs=142 </td>  </tr>
   <tr> <td> 7 </td>  <td> number of restarts </td>    <td> tryAgain=0 </td>  </tr>
   <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> nTripsOnSameSavedWts=0 </td>  </tr>
