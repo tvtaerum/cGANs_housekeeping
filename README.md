@@ -217,6 +217,7 @@ Details of the process are discussed in section 7.
 	<li>..... 2 = featured as attractive and female and high cheek bone</li>
       <li>..... 3 = featured as attractive and female and not high cheek bone and large lips</li>
 </ol>
+
 3. setting up the cGAN so that it will generate and save faces based on the features (embeddings/labels) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 There are four kinds of embedding and the identity of the embedding (0 thru 3) is included in the generated face. In many ways, those faces identified as being 0 are "female without high cheeck bones and without large lips".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  The labels (0 thru 3) are added when creating the image.  Explanations for what we found is discussed in section 6.  
