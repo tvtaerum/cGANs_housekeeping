@@ -200,10 +200,10 @@ There were three parts to this process:
 Details of the process are discussed in section 7. 
 2. identifying the characteristics or attributes to be used and their probabilities in the population of images:
 <ol type="a">
-      <li>a. 0 = featured as being attractive and not male and not high cheek bone and not large lips</li>
-	<li>b. 1 = featured as being attractive and male</li>
-	<li>c. 2 = featured as being attractive and not male and high cheek bone</li>
-      <li>d. 3 = featured as being attractive and not male and not high cheek bone and large lips</li>
+      <li>..... 0 = featured as attractive and not male and not high cheek bone and not large lips</li>
+	<li>..... 1 = featured as attractive and male</li>
+	<li>..... 2 = featured as attractive and not male and high cheek bone</li>
+      <li>..... 3 = featured as attractive and not male and not high cheek bone and large lips</li>
 </ol>
 3. setting up the cGAN so that it will generate and save faces based on the features (embeddings/labels) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
