@@ -268,7 +268,7 @@ While the changing the size of batch is trivial, it often has unexpected outcome
 
 #### c. change optimization from Adam to Adamax for embedding
 
-While Adam optimizers are generally recommended, Adamax is recommended when there are embeddings.  
+While Adam optimizers are generally used, Adamax is recommended when there are embeddings.  
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
