@@ -329,7 +329,7 @@ The recommended folder structure looks as follows:
        <li> images (contains images for README file)</li>
 	</ul>
 </ul>
-Those folders which are in <b>bold</b> need to be created. 
+Those folders which are in <b>BOLD</b> need to be created. 
 
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. select out subset of images with attractive faces and compress <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
