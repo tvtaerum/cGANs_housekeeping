@@ -75,6 +75,12 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence while recovering from mode collapse.     
 
+There are three critical measures of loss:
+<ol>
+	<li>dis_loss, _ = d_model.train_on_batch([X_real, labels_real], y_real)</li>
+	<li>gen_loss, _ = d_model.train_on_batch([X_fake, labels], y_fake)</li>
+	<li>gan_loss = gan_model.train_on_batch([z_input, labels_input], y_gan)</li>
+</ol>
 Before examining the screen shot which comes below, I define the measures used to determine when mode collapse is imminent and recovery is necessary:
 <table style="width:100%">
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
