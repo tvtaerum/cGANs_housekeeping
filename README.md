@@ -300,12 +300,12 @@ def save_plot(examples, labels, epoch, n=10):
 The following is an outline of the programming steps and Python code used to create the results observed in this repository.    
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. create face shots from images using https://github.com/ipazc/mtcnn
+#### c. select out subset of images with attractive faces and compress
+<a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
+When executing, you will get the following output.  
 <p align="left">
 <img src="/images/LoadingAndCompressing50000Images.png" width="200" height="100">
 </p>  
-
-#### c. select out subset of images with attractive faces and compress
-<a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
 #### d. cGan stream 
 <a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 #### e. vectorize images
