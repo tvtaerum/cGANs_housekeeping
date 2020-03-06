@@ -313,14 +313,20 @@ def save_plot(examples, labels, epoch, n=10):
 The following is an outline of the programming steps and Python code used to create the results observed in this repository.  There are three Python programs which are unique to this repository.  The purpose of the code is to assist those who struggled like I struggled to understand the fundamentals of Generative Adversarial Networks and to generate interesting and useful results beyond number and fashion generation.  My edits are not elegant... it purports to do nothing more than resolve a few issues which I imagine many novices to the field of Generative Adversarial Networks face.  If you know of better ways to do something, feel free to demonstrate it.  If you know of others who have found better ways to resolve these issues, feel free to point us to them.  
 
 The recommended folder structure looks as follows:
-   cGANs_housekeeping-master (or any folder name)
-       - files (also contains Python programs)
-           - __celeb__
-	       - __img_align_celeba__ (contains about 202,599 images for data input)
-	       - __real_plots__ (contains arrays of real images for inspection)
-	       - __results__ (contains generated png images of faces and and h5 files for models saved by program)
-	   - __cgan__ (contains images from summary analysis of models)
-       - images (contains images for README file)
+<ul>
+    <li>cGANs_housekeeping-master (or any folder name)</li>
+       <li> files (also contains Python programs)</li>
+	<ul>
+           <li> __celeb__</li>
+		<ul>
+	       <li> __img_align_celeba__ (contains about 202,599 images for data input)</li>
+	       <li> __real_plots__ (contains arrays of real images for inspection)</li>
+	       <li> __results__ (contains generated png images of faces and and h5 files for models saved by program)</li>
+		</ul>
+	   <li> __cgan__ (contains images from summary analysis of models)</li>
+	</ul>
+       <li> images (contains images for README file)</li>
+</ul>
 Those folders which are in __bold___ need to be created. 
 
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
