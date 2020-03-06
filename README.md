@@ -202,7 +202,7 @@ The code to examine the data going into the cGAN is trivial and is included in t
 It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  The GAN sees the images at the convoluted pixel level.  
 ![real faces](images/sampleRealImages.png)
 
-In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only faces featured as attractive may have aided in obtaining results which had considerable clarity.  
+In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only faces featured as attractive helped in obtaining results which had considerable clarity.  
 
 ### 5.  how can I use embedding when I have descriptions of images?
 There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, selecting a particular gender, and having facial features such as high cheek bones and large lips.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  In this example, we could enter in the features:  attractive, female, high cheek bones, and large lips in order to get many faces for fashion models.    
