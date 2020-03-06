@@ -26,7 +26,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
   2.  code fragments illustrating the core of how an issue was resolved
   3.  a Python program to prepare images for selection and training
   4.  a cGan Python program with embedding
-  5.  a Python program which vectorizes image generated with embedding
+  5.  a Python program which vectorizes images generated with embedding
 
 ### Limitations and caveates:
 
