@@ -10,7 +10,11 @@ import numpy as np
 
 np.set_printoptions(precision=3)
 np.set_printoptions(suppress=True)
-varNames1 = ['Attractive','Heavy_Makeup','High_Cheekbones','Mouth_Slightly_Open','Smiling']
+varNames = ["image_id","5_o_Clock_Shadow","Arched_Eyebrows","Attractive","Bags_Under_Eyes","Bald","Bangs","Big_Lips",
+            "Big_Nose","Black_Hair","Blond_Hair","Blurry","Brown_Hair","Bushy_Eyebrows","Chubby","Double_Chin","Eyeglasses","Goatee",
+            "Gray_Hair","Heavy_Makeup","High_Cheekbones","Male","Mouth_Slightly_Open","Mustache","Narrow_Eyes","No_Beard","Oval_Face",
+            "Pale_Skin","Pointy_Nose","Receding_Hairline","Rosy_Cheeks","Sideburns","Smiling","Straight_Hair","Wavy_Hair",
+            "Wearing_Earrings","Wearing_Hat","Wearing_Lipstick","Wearing_Necklace","Wearing_Necktie","Young"]
 data_attractive = pd.read_csv('celeb/list_attr_celeba.csv', nrows=None)['Attractive'].to_numpy()
 
 # load an image as an rgb numpy array
@@ -78,7 +82,7 @@ n_faces = 50000
 all_faces, all_ids = load_faces(directory, n_faces)
 print('Loaded faces: ', all_faces.shape)
 print('Loaded ids: ', all_ids.shape)
-qSave = False
+qSave = True
 if qSave:
 	savez_compressed('celeb/img_align_celeba_attractive.npz', all_faces)
 	savez_compressed('celeb/ids_align_celeba_attractive.npz', all_ids)
