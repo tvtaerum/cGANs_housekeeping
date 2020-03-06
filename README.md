@@ -318,9 +318,9 @@ The recommended folder structure looks as follows:
 	<ul>
        <li> files (also contains Python programs)</li>
 	<ul>
-           <li> __celeb__</li>
+		<li> <b>celeb</b></li>
 		<ul>
-	       <li> __img_align_celeba__ (contains about 202,599 images for data input)</li>
+			<li> <b>img_align_celeba</b> (contains about 202,599 images for data input)</li>
 	       <li> __real_plots__ (contains arrays of real images for inspection)</li>
 	       <li> __results__ (contains generated png images of faces and and h5 files for models saved by program)</li>
 		</ul>
