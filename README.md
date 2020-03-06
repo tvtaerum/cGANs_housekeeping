@@ -302,6 +302,7 @@ The following is an outline of the programming steps and Python code used to cre
 #### b. create face shots from images using https://github.com/ipazc/mtcnn
 #### c. select out subset of images with attractive faces and compress
 <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
+
 When executing, you will get the following output.  
 <p align="left">
 <img src="/images/LoadingAndCompressing50000Images.png" width="200" height="100">
