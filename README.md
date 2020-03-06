@@ -199,7 +199,7 @@ The code to examine the data going into the cGAN is trivial and is included in t
 
 ![real faces rows](images/sampleRealImagesRows.png)
 
-It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  The GAN sees the images at the convoluted pixel level.  
+It's worth remembering that the GAN process sees the images at the convoluted pixel level - it sees every spot and wrinkle, every imperfection.   
 ![real faces](images/sampleRealImages.png)
 
 In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only faces featured as attractive helped in obtaining results which had considerable clarity.  
