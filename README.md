@@ -136,7 +136,7 @@ The numbers on the left side are epochs which produced the observed results.  We
     
 Needless to say, the steam needs to be prepared for interruptions.  Even with preparation, attempts to restart can result in warnings about model and/or layers being trainable=False, dimensions of weights being incompatable for discriminate, generative, and gan models, and optimizations that collapse.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. If your only interest is in examining weights and optimization, then warning messages can often be ignored.  If you wish to restart from where you left off, then you ignore warning messages at considerable risk.   
  
-Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to constrain the make the discriminator and generator work together.  
+Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the program, my experience is you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to constrain and make the discriminator and generator work together.  
  
 Restarting a cGAN requires saving models and their optimizations in case they are required after each epoch.  When saving a model, the layers that get saved are those which are trainable.  It's worth recalling that the discriminator model is set to trainable=False within the gan model.  Depending on the requirements, there may also be layers which are set to trainable=False.  In order to save the models, and recover the fixed weights, the weights must temporarily be set to trainable=True.  The following code fragment is required when saving the discriminator model:  
 ```Python
@@ -158,10 +158,10 @@ And when loading:
 		layer.trainable = True
 	d_model.summary()
 ```
-Setting the layers on an individual basis may seem overly detailed but it is a reminder that, in some circumstances, there are layers which need to be set to trainable-False.     
+Setting the layers on an individual basis may seem overly detailed but it is a reminder that, in some circumstances, there are layers which may need to be set to trainable-False.     
 
 ### 3.  are there different kinds of random initialization processes that can be helpful in accelerating convergence?
-While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a bounded 100-dimensional space.   
+While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a uniform distribution in a bounded 100-dimensional space.   
 ```Python
 def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 	# print("generate_latent_points: ", latent_dim, n_samples)
@@ -181,19 +181,19 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 Substantially, the routine divides the range of values from -3.0 to +3.0 into equal intervals and then randomizes the values by a shuffle.  The process works - I'm still examining whether it accelerates convergence with images.  
  
 ### 4.  how important is the source material (original images of faces)?
-In my attempts to improve the results of the generations, I managed to overlook a critical factor - what does the data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
+In my attempts to improve the results of the generations, I initially overlooked a critical factor - what does the transformed data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
 
 The code to examine the data going into the cGAN is trivial and is included in the final stream.  
 
 ![real faces rows](images/sampleRealImagesRows.png)
 
-It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  
+It's worth remembering that the GAN process sees the images at the pixel level - they see every spot and wrinkle, every imperfection.  The GAN sees the images at the convoluted pixel level.  
 ![real faces](images/sampleRealImages.png)
 
-In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only facces featured as attractive to begin with may have aided in obtaining results which had considerable clarity.  
+In spite of all the imperfections in individual images, my belief is the final results are impressive.  Selecting out only faces featured as attractive may have aided in obtaining results which had considerable clarity.  
 
 ### 5.  how can I use embedding when I have descriptions of images?
-There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, selecting a particular gender, and having facial features such as high cheek bones and large lips.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  In this example, we could enter in the attributes:  attractive, female, high cheek bones, and large lips.  
+There are circumstances where we want to insure that a generated image has particular characteristics, such as a face being attractive, selecting a particular gender, and having facial features such as high cheek bones and large lips.  Looking into the near future, it will be possible to create realistic GAN generated images of models wearing fashionable clothing, with specific expressions, and poses for catalogues.  In this example, we could enter in the features:  attractive, female, high cheek bones, and large lips in order to get many faces for fashion models.    
 
 There were three parts to this process:  
 1. selecting a subset of faces (only those identified as being "attractive"):
@@ -203,17 +203,17 @@ Details of the process are discussed in section 7.
       b. 1 = featured as being attractive and male
       c. 2 = featured as being attractive and not male and high cheek bone
       d. 3 = featured as being attractive and not male and not high cheek bone and large lips 
-3. setting up the cGAN so that it will generate and save faces based on the attributes (embeddings) associated with an image.  
+3. setting up the cGAN so that it will generate and save faces based on the features (embeddings/labels) associated with an image.  
 ![random generated faces](images/4X10RandomlyGeneratedFaces.png)
 There are four kinds of embedding and the identity of the embedding (0 thru 3) is included in the generated face. In many ways, those faces identified as being 0 are "female without high cheeck bones and without large lips".  Those faces identified as 1 (male), are clearly male.  Those faces identifed as 2 are female with high cheek bones.  Feature 3 identifies those faces which supposedly have large lips.  The labels (0 thru 3) are added when creating the image.  Explanations for what we found is discussed in section 6.  
 
 ### 6.  how can I vectorize from generated face to generated face when using embedding?
-Jeff Brownlee provides a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictiver value of the features through embedding as described in section 5. 
+Jeff Brownlee provides a brilliant example of how to vectorize from one face to another face.  In addition to what Brownlee had done, we vectorize two generated faces and then, for the same 100-dimensional space, "add" the predictive value of the features through embedding as described in section 5. 
 
 ![vectorized range of faces](images/4X10VectorizedRangeOfFaces.png)
 Going from left to right, we see the face on the left morphing into the face on the right.  When we compare each row, we see the four features described in section 5.  The only difference between each row are due to the predictive power of the embeddings/labels.  Of particular interest is comparing the second row (embedded value 1: attractive male) with the third row (embedded value 2: attractive female with high cheek bones). Everything except the embedding/label is identical.  
 
-From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) provides insight into what feature selection and embedding means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans actually identifies what is uniquely different in comparing rows three and four.  
+From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attractive female with high cheek bones versus embedded value 3: attractive female with large lips) may provide insight into what a feature actually means.  While the persons identifying features may believe they are only looking at a feature, such as the size of lips, the analytical process of cGans identifies what is uniquely different in comparing rows three and four.  
 
 ```Python
             n_classes = 4     
@@ -236,11 +236,11 @@ The programming fragment illustrates the effect of embedding, where the generate
 
 ### 7.  other changes that can be applied?
 
-There are a number of other adjustments which were made in order with the hope of improving results.  
+There are a number of other adjustments which were made in order to improve outcomes.  
 
 #### a. select faces with certain characteristics - such as attractiveness - for analysis
  
-Only faces identified as being attractive were included.  Given the attributes associated with attractiveness, such as symmetry, it appeared to be a good way to select out those faces which were complete.  
+Only faces identified as being attractive were included.  Given the attributes associated with attractiveness, such as symmetry, clarity and visibility, it appeared to be a good way to select out those faces which were complete.   
 ```Python
 	# enumerate files
 	for idx, filename in enumerate(listdir(directory)):
@@ -255,23 +255,23 @@ Only faces identified as being attractive were included.  Given the attributes a
 ```
 #### b. adjust for memory requirements
 
-Based on my own experiences, I'd surmise that one of the most frequent modifications novices have to make is making adustments so that the problem will fit onto their GPU.  In many circumstances, this is done by adjusting batch sizes.  In this particular case, the fork required a change of n_batch from 128 to 64.  
+Based on my own experiences, I'd surmise that one of the most frequent modifications novices have to make is making adustments so that the problem will fit on their GPU resources.  In many circumstances, this is done by adjusting batch sizes.  In this particular case, the fork required a change of n_batch from 128 to 64.  
 ```Python
 def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
 	bat_per_epo = int(dataset[0].shape[0] / n_batch)
 ...
 train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
 ```
-While the change is trivial, it often has unexpected outcomes which result in mode collapse.  
+While the changing the size of batch is trivial, it often has unexpected outcomes which result in mode collapse.  
 
 #### c. change optimization from Adam to Adamax for embedding
 
-While Adam optimizers are generally the best option, GANs with embedding are best optimized with Adamax.  
+While Adam optimizers are generally recommended, Adamax is recommended when there are embeddings.  
 ```Python
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 ```
 #### d. turn off Tensorflow warnings for debugging purposes
-Tensorflow and Keras are both very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not appropriately matched.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
+Tensorflow and Keras are both very good at giving warnings when syntax being used is out of date, dimensions do not match, or features (such as trainable=True) are not used as required.  The problem is you sometimes have to run through many warnings before seeing the impact of the issue.  In debugging circumstances, being able to shut off warnings can be helpful.  
 ```Python
 qErrorHide = True
 if qErrorHide:
