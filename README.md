@@ -1,14 +1,14 @@
 ## cGANs with embedding in images - housekeeping
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
-In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to finally find programmers and instructors whose code work is complete and run 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows can be considered a branch/fork of Jason Brownlee's work on "vector arithmetic with faces".  
+In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to find programmers and instructors whose code work was complete and aun 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  The ones I mention here are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows can be considered a branch/fork of Jason Brownlee's tutorial on "vector arithmetic with faces".  
 
 ### Motivation for housekeeping:
-Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that suddenly show up and cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
+Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
 <img src="/images/CliffDwellerHuts.png" width="650" height="280">
 </p>
-In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward process.
+In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a process that is already challenging.
 </p>
 
 In the face of so many constraints and the ease with which GANs slide into mode collapse, it can be particularly difficult for the novice (like myself) to make tutorial material work.  While good tutorials make coding as bare bones as possible and adhere as closely as possible to industrial standards so that it's easy to explain and understand the concepts being taught, the code delivered here goes in a different direction.  The Python programs included here invest a greater amount of coding in housekeeping so that the novice, after they've made the essential changes required by their limited environment, will have a better chance of replicating the work done by those who are expert in the field.      
@@ -23,7 +23,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 
 ### Deliverables:
   1.  description of issues identified and resolved within specified limitations
-  2.  code fragments illustrating the core of how the issue was resolved
+  2.  code fragments illustrating the core of how an issue was resolved
   3.  a Python program to prepare images for selection and training
   4.  a cGan Python program with embedding
   5.  a Python program which vectorizes image generated with embedding
@@ -50,7 +50,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 <ol type="1">
   <li>is there an automatic way to recover before "mode collapse"?</li>
   <li>is there a way to restart a cGAN which is interrupted or has not completed convergence?</li>
-  <li>are there non-random initialization values that can be useful?</li>
+  <li>are there different kinds of random initialization values that can be useful?</li>
   <li>how important is the source material (original images of faces)?</li>
   <li>how can I use embedding when I have descriptions of images?</li>
   <li>how can I vectorize from generated face to generated face when using embedding?</li>
@@ -73,9 +73,9 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 </ol>
 
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
-Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence.  The screen shot below illustrates 1. recovery from "mode collapse", 2. the estimate of real and fake "accuracy", and 3. generated images from the first epoch.   
+Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence while recovering from mode collapse.     
 
-Before examining the screen shot which comes below, the measures used to determine when a recovery is necessary follow:
+Before examining the screen shot which comes below, I define the measures used to determine when mode collapse is imminent and recovery is necessary:
 <table style="width:100%">
   <tr> <th> Column </th>    <th> measure </th>      <th> example </th>  </tr>
   <tr> <td> 1 </td>  <td> epoch/max_epochs </td>    <td> 1/100 </td>  </tr>
@@ -88,18 +88,18 @@ Before examining the screen shot which comes below, the measures used to determi
   <tr> <td> 8 </td>  <td> number of restarts using same base </td>    <td> nTripsOnSameSavedWts=0 </td>  </tr>
   <tr> <td> 9 </td>  <td> number of weight saves </td>    <td> nSaves=2 </td>  </tr>
 </table>
-
+There are three parts in the screen shots below: 
 <p align="center">
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
 
-In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and the gan loss would escalate to a very high number (mode collapse).  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
+In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and we would see model collapse.  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
 
 In section 2, we see proof of recovery at the end of epoch 1 with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  These values many not sound impessive until we look at the generated faces from epoch 1.
 
 In section 3, we see a screen shot of the generated faces from epoch 1 out of 100 epoches.  
 
-So how can we recover from a mode collapse.  The syntax below illustrates the core of the process:  
+So how can we recover from a mode collapse?  The syntax below illustrates the core of the process:  
 
 ```Python
 		if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
@@ -114,7 +114,7 @@ So how can we recover from a mode collapse.  The syntax below illustrates the co
 ```
 The previous programming fragment illustrates an approach which often prevents a stream from mode collapse.  It depends on having captured disciminator weights, generator weights, and gan weights either during initialization or later in the process when all model losses are within bounds.  The definition of model loss bounds are arbitrary but reflect expert opinion about when losses are what might be expected and when they are clearly much too high or much too low.  Reasonable discriminator and generator losses are between 0.1 and 1.0, and their arbitrary bounds are set to between 0.001 and 2.0.  Reasonable gan losses are between 0.2 and 2.0 and their arbitrary bounds are set to 0.01 and 4.5.  
 
-What happens then is discriminator, generator, and gan weights are collected when all three losses are "reasonable".  When an individual model's loss goes out of bounds, then the last collected weights for that particular model (and only that model) are replaced, leaving the other model weights are they are, and the process moves forward.  The process stops when mode collapse appears to be unavoidable even when model weights are replaced.  This is identified when a particular set of model weights continue to be reused but repeatedly result in out of bound model losses.   
+What happens then is discriminator, generator, and gan weights are collected when all three losses are "reasonable".  When an individual model's loss goes out of bounds, then the last collected weights for that particular model are replaced, leaving the other model weights are they are, and the process moves forward.  The process stops when mode collapse appears to be unavoidable even when model weights are replaced.  This is identified when a particular set of model weights continue to be reused but repeatedly result in out of bound model losses.   
 
 The programming fragment for saving the weights are:
 
@@ -124,17 +124,17 @@ The programming fragment for saving the weights are:
 		g_trainable_weights = np.array(g_model.get_weights())
 		gan_trainable_weights = np.array(gan_model.get_weights())
 ```
-Needless to say, there are a few additional requirements which can be found in the stream available at the end of the project.  For instance, if your stream goes into mode collapse just after saving your trainable weights, you don't want to reuse the most recently saved weights.  
+Needless to say, there are a few additional requirements which can be found in the Python program available at the end of this README document.  For instance, if your stream goes into mode collapse just after saving your trainable weights, you don't want to reuse the most recently saved weights.   
 
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
-There is nothing quite as upsetting as running a stream and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before something goes wrong and I am unable to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  The images which follow illustrate easily observed improvements over epochs.  
+There is nothing quite as problematic as running a program and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before something goes wrong and I am unable to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  The images which follow illustrate observed improvements over epochs.  
 <p align="center">
 <img src="/images/improvedImagesOverEpochs.png" width="650" height="500">
 </p>
   
-The numbers on the left side are epochs required to produce the observed results.  We can see the faint images of faces by epoch 5, good impressions of faces by epoch 45, details of faces by epoch 165 and small improvements by epoch 205.  We want to do better than being stuck at epoch 45 and we want to be able to continue from epoch 45 if the process is interrupted.  We are, in a sense, mapping from a 100-dimensional space to images of faces - it takes time to complete the mapping from representative parts of the 100-dimensional space.      
+The numbers on the left side are epochs which produced the observed results.  We can see the faint images of faces by epoch 5, good impressions of faces by epoch 45, details of faces by epoch 165 and small improvements by epoch 205.  We want to do better than being stuck at epoch 45 and we want to be able to continue from epoch 45 if the process is interrupted.  We are, in a sense, mapping from a 100-dimensional space to images of faces and it takes time to complete the mapping from representative parts of the 100-dimensional space.      
     
-Needless to say, the steam needs to be prepared for interruptions.  Even with preparation, attempts to restart can result in warnings about model and/or layers being trainable=False, dimensions of weights being different for discriminate, generative, and gan models, and optimizations that collapse.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. If your only interest is in examining weights and optimization, then warning messages can often be ignored.  If you wish to restart from where you left off, then you ignore warning messages at considerable risk.   
+Needless to say, the steam needs to be prepared for interruptions.  Even with preparation, attempts to restart can result in warnings about model and/or layers being trainable=False, dimensions of weights being incompatable for discriminate, generative, and gan models, and optimizations that collapse.  It's important to note that cGAN will not properly restart unless you resolve the issues of what is trainable, what are the correct dimensions, and what are viable models. If your only interest is in examining weights and optimization, then warning messages can often be ignored.  If you wish to restart from where you left off, then you ignore warning messages at considerable risk.   
  
 Once issues with dimensions and what is trainable are resolved, there are then problems where models suffer from model collapse when attempts are made to restart the cGAN.  What happened?  If you wish to continue executing the stream you need to handle the GAN model as a new instance using the loaded discriminator and generator models.  After all, the GAN model is there only to constrain the make the discriminator and generator work together.  
  
