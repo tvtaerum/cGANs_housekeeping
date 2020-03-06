@@ -72,6 +72,7 @@ In the face of so many constraints and the ease with which GANs slide into mode 
 </ol>
 
 ### 1.  is there an automatic way to recover from some "mode collapse"?:
+
 Even with reasonable learning rates, convergence can slide into "mode collapse" and require a manual restart.  The stream provides one way of giving intial estimates multiple but limited opportunities to halt it's slide towards mode collapse.  The process also allows the stream to retain whatever progress it has made towards convergence while recovering from mode collapse.     
 
 Before examining the screen shot which comes below, I define the measures used to determine when mode collapse is imminent and recovery is necessary:
@@ -125,11 +126,11 @@ The programming fragment for saving the weights are:
 ```
 Needless to say, there are a few additional requirements which can be found in the Python program available at the end of this README document.  For instance, if your stream goes into mode collapse just after saving your trainable weights, there is little likelihood that the most recently saved weights will save the recovery.  
 
-As we observe in the screen shot below, not every execution results in a requirement to load in most recent working trainable weights.  
+It's important to note that a critical aspect of this stream is to help the novice get over the difficult challenge of making the first GAN program work.  As such, its focus is not simply on automatic ways to recover from mode collapse and methods of restarting streams, but on the debugging process that may be required.  To do this, we need constant reporting.  As we observe in the screen shot below, not every execution results in a requirement to load in most recent working trainable weights.  However, we do see information which may be helpful in understanding what is going on.  
 <p align="center">
 <img src="/images/nonEscapingModeCollapse.png" width="500" height="150">
 </p>
-The area blocked in red 
+Typically, the situation for loss is reported every five iterations.  As illustrated in the area in the red blocked area, when the program appears to be drifting into mode collapse, losses are reported on every iteration.  In the blue blocked area, we can see the generative loss beginning to incease beyond reasonable limits.  In the green blocked area, we see the tendency for when the discriminator or generator losses move beyond reasonable limits, the gans losses move out of range.  And finally, in the brown blocked area, we see a counter of the number of times weights have been saved to be used later in recovery.  
 
 ### 2.  is there a way to restart a cGAN which has not completed convergence:
 There is nothing quite as problematic as running a program and six days later the process is interrupted when it appears to be 90% complete.  Like many others, I have run streams for over 21 days using my GPU before something goes wrong and I am unable to restart the process.  Progress is measured in "epochs".  There is no guarantee but with a bit of good fortune and cGAN steams which are properly set up, every epoch brings an improvement in clarity.  The images which follow illustrate observed improvements over epochs.  
