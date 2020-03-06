@@ -310,7 +310,19 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.close()
 ```
 ###  8.  cGan streams and data sources:
-The following is an outline of the programming steps and Python code used to create the results observed in this repository.  There are three Python programs which are unique to this repository.  The purpose of the code is to assist those who struggled like I struggled to understand the fundamentals of Generative Adversarial Networks and to generate interesting and useful results beyond number and fashion generation.  My edits are not elegant... it purports to do nothing more than resolve a few issues which I imagine many novices to the field of Generative Adversarial Networks face.  If you know of better ways to do something, feel free to demonstrate it.  If you know of others who have found better ways to resolve these issues, feel free to point us to them.    
+The following is an outline of the programming steps and Python code used to create the results observed in this repository.  There are three Python programs which are unique to this repository.  The purpose of the code is to assist those who struggled like I struggled to understand the fundamentals of Generative Adversarial Networks and to generate interesting and useful results beyond number and fashion generation.  My edits are not elegant... it purports to do nothing more than resolve a few issues which I imagine many novices to the field of Generative Adversarial Networks face.  If you know of better ways to do something, feel free to demonstrate it.  If you know of others who have found better ways to resolve these issues, feel free to point us to them.  
+
+The recommended folder structure looks as follows:
+   cGANs_housekeeping-master (or any folder name)
+       - files (also contains Python programs)
+           - __celeb__
+	       - __img_align_celeba__ (contains about 202,599 images for data input)
+	       - __real_plots__ (contains arrays of real images for inspection)
+	       - __results__ (contains generated png images of faces and and h5 files for models saved by program)
+	   - __cgan__ (contains images from summary analysis of models)
+       - images (contains images for README file)
+Those folders which are in __bold___ need to be created. 
+
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. select out subset of images with attractive faces and compress <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
 
@@ -319,6 +331,10 @@ When executing, you will get the following output:
 <img src="/images/LoadingAndCompressing50000Images.png" width="200" height="100">
 </p>  
 
+It will create two files:
+    ids_align_celeba_attractive.npz
+    image_align_celeba_attractive.npz
+    
 #### c. cGan stream <a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 
 #### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a>
