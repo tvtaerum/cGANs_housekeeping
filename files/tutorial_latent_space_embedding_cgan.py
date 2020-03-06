@@ -1,7 +1,4 @@
 # example of a gan for generating faces
-#    change of lr and beta_1
-#    use of shuffle
-#    create backup of weights
 import numpy as np
 import pandas as pd
 from numpy import load
@@ -28,14 +25,11 @@ from tensorflow.keras.layers import LeakyReLU
 from tensorflow.keras.layers import Dropout
 from tensorflow.keras.layers import Embedding
 from tensorflow.keras.layers import Concatenate
-from matplotlib import pyplot
 import matplotlib.pyplot as plt
 from tensorflow.keras.utils import plot_model
 from matplotlib import patheffects as path_effects
 import collections
 from tensorflow.keras.models import load_model
-
-import tensorflow as tf
 from tensorflow import get_logger as log
 
 #  SET YOUR FLAGS
@@ -57,7 +51,6 @@ def define_discriminator(in_shape=(80,80,3), n_classes=4):
 	print(">>embedding>> in_shape[0], in_shape[1], n_nodes: ", in_shape[0], in_shape[1], n_nodes)
 	li = Dense(n_nodes)(li)
 	li = Reshape((in_shape[0], in_shape[1], 1))(li)
-
 	# image input
 	dropout = 0.1
 	in_image = Input(shape=in_shape)
@@ -65,7 +58,6 @@ def define_discriminator(in_shape=(80,80,3), n_classes=4):
 	# concat label as a channel
 	merge = Concatenate()([in_image, li])
 	print("\nmerge.shape: ", merge.shape)
-
 	# sample to 80x80
 	fe = Conv2D(128, (5,5), padding='same')(merge)
 	fe = LeakyReLU(alpha=0.2)(fe)
@@ -100,13 +92,8 @@ def define_discriminator(in_shape=(80,80,3), n_classes=4):
 	print("out_layer.shape: ", out_layer.shape)
 	# define model
 	model = Model([in_image, in_label], out_layer)
-#	model = Model(in_image, out_layer)
 	print("\nmodel: ", model)
 	# compile model
-	# opt = Adam(lr=0.0001, beta_1=0.4)
-	# opt = Adam(lr=0.0008, beta_1=0.1)
-	# opt = Adam(lr=0.0003, beta_1=0.2)
-	# opt = Adam(lr=0.0002, beta_1=0.5, beta_2=0.999, epsilon=10e-8)
 	opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
 	model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	print("\nembedding_layer.get_weights(): \n",embedding_layer.get_weights())
@@ -126,7 +113,6 @@ def define_generator(latent_dim, n_classes=4):
 	li = Dense(n_nodes)(li)
 	li = Reshape((5 , 5, 1))(li)
 	print("generator...  n_nodes, li.shape: ", n_nodes, li.shape)
-
 	##### foundation for 5x5 image
 	in_lat = Input(shape=(latent_dim,))
 	n_nodes = 128 * 5 * 5
@@ -135,11 +121,9 @@ def define_generator(latent_dim, n_classes=4):
 	genX = Reshape((5, 5, 128))(genX)
 	dropout = 0.1
 	print("genX.shape: ", genX.shape)
-
 	##### merge image gen and label input
 	merge = Concatenate()([genX, li])
 	print("merge.shape: ", merge.shape)
-
 	##### create merged model
 	# upsample to 10x10
 	gen = Conv2DTranspose(128, (4,4), strides=(2,2), padding='same')(merge)
@@ -185,9 +169,6 @@ def define_gan(g_model, d_model):
 	# define gan model as taking noise and label and outputting a classification
 	model = Model([gen_noise, gen_label], gan_output)
 	# compile model
-	# opt = Adam(lr=0.0002, beta_1=0.6)
-	# opt = Adam(lr=0.0004, beta_1=0.05)
-	# opt = Adam(lr=0.0004, beta_1=0.06)
 	opt = Adamax(lr=0.0002, beta_1=0.5, beta_2=0.999, epsilon=10e-8)
 	model.compile(loss='binary_crossentropy', optimizer=opt)
 	model.summary()
@@ -292,8 +273,6 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 	x_input = asarray([initX + stepX*(float(i)) for i in range(0,latent_dim * n_samples)])
 	shuffle(x_input)
 	# generate points in the latent space
-	# x_input = randn(latent_dim * n_samples)
-	# reshape into a batch of inputs for the network
 	z_input = x_input.reshape(n_samples, latent_dim)
 	randx = random(n_samples)
 	labels = np.zeros(n_samples, dtype=int)
@@ -320,7 +299,6 @@ def save_plot(examples, labels, epoch, n=10):
 		# define subplot
 		fig = plt.subplot(n, n, 1 + i)
 		strLabel = str(labels[i])
-		# fig.title = strLabel
 		# turn off axis
 		fig.axis('off')
 		fig.text(8.0,20.0,strLabel, fontsize=6, color='white')
@@ -378,47 +356,31 @@ def summarize_performance(epoch, g_model, d_model, gan_model, dataset, latent_di
 	d_model.trainable = True
 	for layer in d_model.layers:
 		layer.trainable = True
-	######  DO I NEED TO COMPILE THE D_MODEL BEFORE SAVING????
-	###### opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
-	###### d_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	d_model.save(filename)
 	d_model.trainable = False
 	for layer in d_model.layers:
 		layer.trainable = False
 
 
-def restart(ist_epochs):
+def restart(epochs_done):
 	# gen_weights = array(model.get_weights())
-	print("****  PULLING IN EPOCH: ", ist_epochs)
-	filename = 'celeb/results/generator_model_dis%03d.h5' % (ist_epochs)
+	print("****  PULLING IN EPOCH: ", epochs_done)
+	filename = 'celeb/results/generator_model_dis%03d.h5' % (epochs_done)
 	d_model = load_model(filename, compile=True)
-	############ d_model.summary()
 	d_model.trainable = True
 	for layer in d_model.layers:
 		layer.trainable = True
-	############ opt = Adamax(lr=0.00007, beta_1=0.08, beta_2=0.999, epsilon=10e-8)
-	############ d_model.compile(loss='binary_crossentropy', optimizer=opt, metrics=['accuracy'])
 	d_model.summary()
-	filename = 'celeb/results/generator_model_%03d.h5' % (ist_epochs)
+	filename = 'celeb/results/generator_model_%03d.h5' % (epochs_done)
 	g_model = load_model(filename, compile=True)
 	g_model.summary()
-	# g_model.trainable = True
-	# for layer in g_model.layers:
-	# 	layer.trainable = True
-	# g_model.summary()
-	# filename = 'celeb/results/generator_model_gan%03d.h5' % (ist_epochs)
-	# gan_model = load_model(filename, compile=True)
 	gan_model = define_gan(g_model, d_model)
 	gan_model.summary()
-	# gan_model.trainable = True
-	# for layer in gan_model.layers:
-	# 	layer.trainable = True
-	# gan_model.summary()
 	return d_model, g_model, gan_model
 
  
 # train the generator and discriminator
-def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batch=128, ist_epochs=0):
+def train(g_model, d_model, gan_model, dataset, latent_dim, epochs_goal=100, n_batch=128, epochs_done=0):
 	nTryAgains = 0
 	nTripsOnSameSavedWts = 0
 	nSaves = 0
@@ -431,54 +393,28 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 	ij = 0
 	ijSave = -100
 	# manually enumerate epochs
-	for i in range(ist_epochs, n_epochs):
+	for i in range(epochs_done, epochs_goal):
 		# enumerate batches over the training set
 		for j in range(bat_per_epo):
 			ij+=1
 			# get randomly selected 'real' samples
-			# X_real, y_real = generate_real_samples(dataset, half_batch)
 			[X_real, labels_real], y_real = generate_real_samples(dataset, half_batch)
 			qDebug=False
-			if qDebug: 
-				print("X_real: ", X_real)
-				print("X_real.shape: ", X_real.shape)
-				print("type(X_real): ", type(X_real))
-				print("type(X_real[0]): ", type(X_real[0]))
-				print("labels_real: ", labels_real)
-				print("labels_real.shape: ", labels_real.shape)
-				print("type(labels_real): ", type(labels_real))
-				print("type(labels_real[0]): ", type(labels_real[0]))
-				print("y_real: ", y_real)
-				print("y_real.shape: ", y_real.shape)
-				print("type(y_real): ", type(y_real))
-				print("type(y_real[0]): ", type(y_real[0]))
 			# update discriminator model weights
-			# d_loss1, _ = d_model.train_on_batch(X_real, y_real)
-			d_loss1, _ = d_model.train_on_batch([X_real, labels_real], y_real)
-			#XXXX d_loss1, _ = d_model.train_on_batch([X_real, y_real], labels_real)
-			# import sys
-			# sys.exit(0)
-			# generate 'fake' examples
-			# X_fake, y_fake = generate_fake_samples(g_model, latent_dim, half_batch)
+			dis_loss, _ = d_model.train_on_batch([X_real, labels_real], y_real)
 			[X_fake, labels], y_fake = generate_fake_samples(g_model, latent_dim, half_batch, cumProbs)
-			# update discriminator model weights
-			# d_loss2, _ = d_model.train_on_batch(X_fake, y_fake)
-			d_loss2, _ = d_model.train_on_batch([X_fake, labels], y_fake)
-			#XXXX d_loss2, _ = d_model.train_on_batch([X_fake, y_fake], labels)
-			# prepare points in latent space as input for the generator
-			# X_gan = generate_latent_points(latent_dim, n_batch)
+			gen_loss, _ = d_model.train_on_batch([X_fake, labels], y_fake)
 			[z_input, labels_input] = generate_latent_points(latent_dim, n_batch, cumProbs)
 			# create inverted labels for the fake samples
 			y_gan = ones((n_batch, 1))
 			# update the generator via the discriminator's error
-			# g_loss = gan_model.train_on_batch(X_gan, y_gan)
-			g_loss = gan_model.train_on_batch([z_input, labels_input], y_gan)
+			gan_loss = gan_model.train_on_batch([z_input, labels_input], y_gan)
 			# summarize loss on this batch
-			if (j+1) % 5==0 or d_loss1 > 1.10 or d_loss2 > 1.10 or g_loss > 1.80:
+			if (j+1) % 5==0 or dis_loss > 1.10 or gen_loss > 1.10 or gan_loss > 1.80:
 				diff = int(time.time()-now)
 				print('>%d/%d, %d/%d, d1=%.3f, d2=%.3f, g=%.3f, secs=%d, tryAgain=%d, nTripsOnSameSavedWts=%d, nSaves=%d' %
-					(i+1, n_epochs, j+1, bat_per_epo, d_loss1, d_loss2, g_loss, diff, nTryAgains, nTripsOnSameSavedWts, nSaves))
-			if d_loss1 > 0.30 and d_loss1 < 0.95 and d_loss2 > 0.25 and d_loss2 < 0.95 and g_loss > 0.40 and g_loss < 1.50:
+					(i+1, epochs_goal, j+1, bat_per_epo, dis_loss, gen_loss, gan_loss, diff, nTryAgains, nTripsOnSameSavedWts, nSaves))
+			if dis_loss > 0.30 and dis_loss < 0.95 and gen_loss > 0.25 and gen_loss < 0.95 and gan_loss > 0.40 and gan_loss < 1.50:
 				nTripsOnSameSavedWts = 0
 				if ij - ijSave > 8:
 					nSaves+=1
@@ -486,17 +422,17 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 					d_trainable_weights = np.array(d_model.get_weights())
 					g_trainable_weights = np.array(g_model.get_weights())
 					gan_trainable_weights = np.array(gan_model.get_weights())
-			if (d_loss1 < 0.001 or d_loss1 > 2.0) and ijSave > 0:
+			if (dis_loss < 0.001 or dis_loss > 2.0) and ijSave > 0:
 				nTryAgains+=1
 				nTripsOnSameSavedWts+=1
 				print("LOADING d_model",j+1," from ",ijSave)
 				d_model.set_weights(d_trainable_weights)
-			if (d_loss2 < 0.001 or d_loss2 > 2.0) and ijSave > 0:
+			if (gen_loss < 0.001 or gen_loss > 2.0) and ijSave > 0:
 				nTryAgains+=1
 				nTripsOnSameSavedWts+=1
 				print("LOADING g_model",j+1," from ",ijSave)
 				g_model.set_weights(g_trainable_weights)
-			if (g_loss < 0.010 or g_loss > 4.50) and ijSave > 0:
+			if (gan_loss < 0.010 or gan_loss > 4.50) and ijSave > 0:
 				nTryAgains+=1
 				nTripsOnSameSavedWts+=1
 				print("LOADING gan_models",j+1," from ",ijSave)
@@ -516,13 +452,12 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, n_epochs=100, n_batc
 latent_dim = 100
 
 if qRestart:
-        ist_epochs = 100
-        ist_epochs = 200
-        n_epochs = 205
-        d_model, g_model, gan_model = restart(ist_epochs = ist_epochs)
+        epochs_done = 9
+        epochs_goal = 30
+        d_model, g_model, gan_model = restart(epochs_done = epochs_done)
 else:
-        ist_epochs = 0
-        n_epochs = 100
+        epochs_done = 0
+        epochs_goal = 100
         # create the discriminator
         d_model = define_discriminator()
         # create the generator
@@ -533,4 +468,4 @@ else:
 # load image data
 dataset, cumProbs = load_real_samples()
 save_real_plots(dataset, nRealPlots=2)
-train(g_model, d_model, gan_model,  dataset, latent_dim, n_epochs=n_epochs, n_batch=64, ist_epochs=ist_epochs)
+train(g_model, d_model, gan_model,  dataset, latent_dim, epochs_goal=epochs_goal, n_batch=64, epochs_done=epochs_done)
