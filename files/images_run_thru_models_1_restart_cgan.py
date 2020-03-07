@@ -76,7 +76,7 @@ for idx, filename in enumerate(listdir(directory)):
     if ".h5" in filename and not("_gen" in filename) and not("_dis" in filename):
         iFile += 1
         lstEpochs = [5,25,45,65,85,105,125,145,165,185,205]
-        lstEpochs = [2,4,5,6,7,8,9]
+        lstEpochs = [5,15,25,35,45,55,65,75,85,90]
         if iFile in lstEpochs: 
             model = load_model(directory + filename)
             gen_weights = array(model.get_weights())
