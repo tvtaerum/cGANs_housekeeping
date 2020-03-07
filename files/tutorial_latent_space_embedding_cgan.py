@@ -34,7 +34,7 @@ from tensorflow import get_logger as log
 
 #  SET YOUR FLAGS
 qErrorHide = False
-qRestart = True
+qRestart = False
 if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
@@ -439,7 +439,7 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, epochs_goal=100, n_b
 				gan_model.set_weights(gan_trainable_weights)
 			# if (j+1) % 10 == 0:
 				# summarize_performance(i, g_model, d_model, dataset, latent_dim)
-			if nTripsOnSameSavedWts > 100:
+			if nTripsOnSameSavedWts > 20:
 				print("**********  Too many rebuilds  **************")
 				summarize_performance(i, g_model, d_model, dataset, latent_dim)
 				import sys
@@ -452,8 +452,8 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, epochs_goal=100, n_b
 latent_dim = 100
 
 if qRestart:
-        epochs_done = 9
-        epochs_goal = 30
+        epochs_done = 100
+        epochs_goal = 105
         d_model, g_model, gan_model = restart(epochs_done = epochs_done)
 else:
         epochs_done = 0
