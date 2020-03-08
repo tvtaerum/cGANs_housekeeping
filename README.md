@@ -172,10 +172,10 @@ And when loading:
 ```
 Setting the layers on an individual basis may seem overly detailed but it is a reminder that, in some circumstances, there are layers which may need to be set to trainable-False. 
 
-Three parameters need to be changed in order to restart the process:  qRestart=True, epochs_done, epochs_goal.  These parameters are found near the beginning of the Python program.  
+Three parameters need to be changed in order to restart the process:  qRestart, epochs_done, epochs_goal.  These parameters are found near the beginning of the Python program.  
 ```Python
 #    INDICATE IF STARTING OR CONTINUING FROM PREVIOUS RUN
-qREstart = False
+qRestart = False
 if qRestart:
     epochs_done = 105
     epochs_goal = 115
@@ -183,6 +183,10 @@ else:
     epochs_done = 0
     epochs_goal = 100
 ```
+qRestart is set to True indicating the program needs to start from where it left off.
+"epochs_done" refers to the number of epochs already completed.  
+"epochs_goal" refers to how many epochs you think you'd like to complete.  
+
 
 ### 3.  are there different kinds of random initialization processes that can be helpful in accelerating convergence?
 While the use of normal like distributions may be useful, there is no reason to believe that other distributions will not work.  A small investigation on my part suggested that leptokurtic distributions were poorest in generating good images.  For most of the results discussed here, I use a uniform distribution in a bounded 100-dimensional space.   
