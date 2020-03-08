@@ -2,11 +2,13 @@
 ### Housekeeping python code for training and utilizing cGans with embedding.  
 
 In particular I thank Jason Brownlee for his brilliant work and tutorials at https://machinelearningmastery.com (citations below in project), Iván de Paz Centeno for his work on face detection at https://github.com/ipazc/mtcnn, and  Jeff Heaton for his insights on embedding at https://www.youtube.com/user/HeatonResearch.  It took me more than a year digging into GANs on the Internet to find programmers and instructors whose code work was complete and ran 'out of the box' (except for system related issues) and they also do a wonderful job of explaining why their streams work.  Jason Brownlee and Jeff Heaton are not the only instructors I found who are very impressive but they are the source of insights for this presentation. The description which follows can be considered a branch/fork of Jason Brownlee's tutorial on "vector arithmetic with faces".  
-
+<p align="center">
+<img src="/images/CliffDwellerHuts.png" width="650" height="280">
+</p>
 ### Motivation for housekeeping:
 Major issues with GANs include mode collapse and unscheduled interruptions of long running programs.  Even the best GAN program can leave a person scratching their head wondering why their "minor" changes resulted in various forms of mode collapse.  In particular, the user might discover there are no obvious solutions to bad initial randomized values, no obvious way to start a stream from where it left off, no apparent explanation for generated images which are fuzzy and obscure, warning messages that cannot be turned off, and no obvious ways to vectorize generated images when embedding is employed.   
 <p align="center">
-<img src="/images/CliffDwellerHuts.png" width="650" height="280">
+<img src="/images/attractiveFaces.png" width="650" height="280">
 </p>
 In particular, the user may not have enough memory to use the code 'out of the box', it may require 20 or 30 attempts before it avoids mode collapse, attempts to debug Tensorflow or Keras may be hindered by never ending warning messages, matching dimensions of generator and discriminator models can be difficult, the suggested learning rates may not be appropriate given small modifications, the user may run into issues with dated, or system specific code... there are so many obstacles that get in the way of operationalizing what ought to be a straight forward but complex process.
 </p>
