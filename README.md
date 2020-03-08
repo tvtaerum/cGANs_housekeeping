@@ -102,11 +102,11 @@ There are three parts in the screen shots below:
 <img src="/images/escapingModeCollapse.png" width="850" height="225">
 </p>
 
-In section 1, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and we would see mode collapse.  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
+In layer 1 of the screen shot above, we can see at epoch 1/100 and iteration 126/781, the discriminator loss has dropped to near zero and the gan loss is beginning to escalate.  Left to itself, the discriminator loss would drop to zero and we would see mode collapse.  In this case, the saved discriminator weights (d_weights) are loaded back in and the stream recovers.  
 
-In section 2, we see proof of recovery at the end of epoch 1 with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  These values may not sound impessive until we look at the generated faces from epoch 1.
+In layer 2, we see proof of recovery at the end of epoch 1 with discriminator loss at 0.459 and gan loss at 1.280.  At this point, the accuracy for "real" is 77% and fake is 93%.  These values may not sound impessive until we look at the generated faces from epoch 1.
 
-In section 3, we see a screen shot of the generated faces from epoch 1 out of 100 epoches.  
+In layer 3, we see a screen shot of the generated faces from epoch 1 out of 100 epoches.  
 
 So how can we recover from a mode collapse?  The syntax below illustrates the core of the process:  
 
