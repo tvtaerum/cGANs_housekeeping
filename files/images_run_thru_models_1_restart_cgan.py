@@ -73,10 +73,9 @@ directory = 'celeb/results_restart_trainable_01_cgan/'
 directory = 'celeb/results/'
 iFile = 0
 for idx, filename in enumerate(listdir(directory)):
-    if ".h5" in filename and not("_gen" in filename) and not("_dis" in filename):
+    if ".h5" in filename and not("_gan" in filename) and not("_dis" in filename):
         iFile += 1
-        lstEpochs = [5,25,45,65,85,105,125,145,165,185,205]
-        lstEpochs = [5,15,25,35,45,55,65,75,85,90]
+        lstEpochs = [5,15,25,35,45,55,65,75,85,95,105,115,125,135,145,150]
         if iFile in lstEpochs: 
             model = load_model(directory + filename)
             gen_weights = array(model.get_weights())
