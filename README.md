@@ -361,7 +361,7 @@ It will create two files:
     
 #### c. cGan stream <a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 
-#### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a>
+#### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a> 
 ```Python
 directory = 'celeb/results/'
 iFile = 0
