@@ -362,5 +362,15 @@ It will create two files:
 #### c. cGan stream <a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 
 #### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a>
-
+```Python
+directory = 'celeb/results/'
+iFile = 0
+for idx, filename in enumerate(listdir(directory)):
+    if ".h5" in filename and not("_gan" in filename) and not("_dis" in filename):
+        iFile += 1
+        lstEpochs = [5,15,25,35,45,55,65,75,85,95,105,115,125,135,145,150]
+        if iFile in lstEpochs: 
+            model = load_model(directory + filename)
+            gen_weights = array(model.get_weights())
+```
 #### LICENSE  <a href="/LICENSE">MIT license</a>
