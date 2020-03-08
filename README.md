@@ -361,7 +361,11 @@ It will create two files:
     
 #### c. cGan stream <a href="/files/tutorial_latent_space_embedding_cgan.py">cGan embedding</a>
 
+Refer back to Python coding fragments for explanation on restarting program.
+
 #### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a> 
+
+The list of images for visual examination depends on the lstEpochs variable below.  
 ```Python
 directory = 'celeb/results/'
 iFile = 0
