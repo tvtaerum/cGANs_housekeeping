@@ -34,10 +34,18 @@ from tensorflow import get_logger as log
 
 #  SET YOUR FLAGS
 qErrorHide = False
-qRestart = False
 if qErrorHide:
     print("\n***REMEMBER:  WARNINGS turned OFF***\n***REMEMBER:  WARNINGS turned OFF***\n")
     log().setLevel('ERROR')
+
+#    INDICATE IF STARTING FRESH OR CONTINUING FROM PREVIOUS RUN
+qRestart = False
+if qRestart:
+    epochs_done = 105
+    epochs_goal = 115
+else:
+    epochs_done = 0
+    epochs_goal = 100 
 
 # define the standalone discriminator model
 def define_discriminator(in_shape=(80,80,3), n_classes=4):
@@ -452,12 +460,8 @@ def train(g_model, d_model, gan_model, dataset, latent_dim, epochs_goal=100, n_b
 latent_dim = 100
 
 if qRestart:
-        epochs_done = 100
-        epochs_goal = 105
         d_model, g_model, gan_model = restart(epochs_done = epochs_done)
 else:
-        epochs_done = 0
-        epochs_goal = 100
         # create the discriminator
         d_model = define_discriminator()
         # create the generator
