@@ -368,7 +368,7 @@ Refer back to Python coding fragments for explanation on restarting program.
 
 #### d. vectorize images <a href="/files/images_run_thru_models_1_restart_cgan.py">run thru faces using embedding</a> 
 
-The list of images for visual examination depends on the lstEpochs variable below.  
+The list of images for visual examination depends on the lstEpochs variable included in the code fragment below.  In the example below, epochs 5, 15, 25... 145, 150 are displayed.  If you have fewer than 150 epochs saved then you'll need to adjust the lstEpochs list.    
 ```Python
 directory = 'celeb/results/'
 iFile = 0
