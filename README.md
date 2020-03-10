@@ -335,7 +335,7 @@ The recommended folder structure looks as follows:
 <ul>
     <li>cGANs_housekeeping-master (or any folder name)</li>
 	<ul>
-       <li> files (also contains Python programs)</li>
+       <li> files (also contains Python programs - program run from here)</li>
 	<ul>
 		<li> <b>celeb</b></li>
 		<ul>
@@ -349,6 +349,7 @@ The recommended folder structure looks as follows:
 	</ul>
 </ul>
 Those folders which are in <b>BOLD</b> need to be created. 
+All Python programs must be run from within the "file" directory.  
 
 #### a. download celebrity images from https://www.kaggle.com/jessicali9530/celeba-dataset
 #### b. select out subset of images with attractive faces and compress <a href="/files/images_convert_mtcnn_attractive_faces.py">MTCNN convert attractive faces</a>
