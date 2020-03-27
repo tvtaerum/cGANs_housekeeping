@@ -213,7 +213,7 @@ def generate_latent_points(latent_dim, n_samples, cumProbs, n_classes=4):
 Substantially, the routine divides the range of values from -3.0 to +3.0 into equal intervals and then randomizes the values by a shuffle.  The process works - I'm still examining whether it accelerates convergence with images.  
  
 ### 4.  how important is the source material (original images of faces)?
-In my attempts to improve the results of the generations, I initially overlooked a critical factor - what does the transformed data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
+It is easy to miss a critical factor - what does the transformed data going into the cGAN look like.  When the data going into a stream is a derivative of another process, as in this case, it is critical to examine the quality of the input data before declaring the results to be useful or invalid.  
 
 The code to examine the data going into the cGAN is trivial and is included in the final stream.  
 
