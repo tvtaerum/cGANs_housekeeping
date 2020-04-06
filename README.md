@@ -58,6 +58,7 @@ In the face of so many constraints and the ease with which cGANs slide into mode
   <li>how important is the source material (original images of faces)?</li>
   <li>how can I use embedding when I have descriptions of images?</li>
   <li>how can I vectorize from generated face to generated face when using embedding?</li>
+  <li>how can I use averaging to generate calculated faces?</li>
   <li>what other adjustments might be applied?</li>
 <ol type="a">
 	<li>selecting only faces with certain features (e.g. attractiveness)</li>
@@ -269,7 +270,21 @@ From an analytical perspective, comparing rows 3 and 4 (embedded value 2: attrac
 ```
 The programming fragment illustrates the effect of embedding, where the generated latent points are identical but the embedded labels are different - resulting in generated images which are marketly different.  The effect of label information is most clearly illustrated when we compare row 2 (males) and row 3 (females with high cheek dones).  
 
-### 7.  other changes that can be applied?
+### 7.  how can I use averaging to generate calculated faces?
+
+<p align="center">
+<img src="/images/sourceFaces.png" width="650" height="135">
+</p>
+
+<p align="center">
+<img src="/images/AveragedFaces_4x.png" width="650" height="135">
+</p>
+
+<p align="center">
+<img src="/images/neutralWoman.png" width="650" height="135">
+</p>
+
+### 8.  other changes that can be applied?
 
 There are a number of other adjustments which were made in order to improve outcomes.  
 
@@ -329,7 +344,7 @@ def save_plot(examples, labels, epoch, n=10):
 	plt.savefig(filename)
 	plt.close()
 ```
-###  8.  cGan streams and data sources:
+###  9.  cGan streams and data sources:
 The following is an outline of the programming steps and Python code used to create the results observed in this repository.  There are three Python programs which are unique to this repository.  The purpose of the code is to assist those who struggled like I struggled to understand the fundamentals of Generative Adversarial Networks and to generate interesting and useful results beyond number and fashion generation.  My edits are not elegant... it purports to do nothing more than resolve a few issues which I imagine many novices to the field of Generative Adversarial Networks face.  If you know of better ways to do something, feel free to demonstrate it.  If you know of others who have found better ways to resolve these issues, feel free to point us to them.  
 
 The recommended folder structure looks as follows:
