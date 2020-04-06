@@ -272,16 +272,21 @@ The programming fragment illustrates the effect of embedding, where the generate
 
 ### 7.  how can I use averaging to generate calculated faces?
 
+The following extends the processes provided by Jason Brownlee for vectorizing, averaging, and calculating new images based on previously estimated weights.    
+In our case, we use the labels "[1,2]" to create the illustration images for:  1. "neutral male", 2. "toothy smile male", 3. "toothy smile female" in order to calculate the "neutral female". The following screen shot shows the sourced generated images used to create the average faces.  
+
+The following screenshot illustrates the results for averaging "neutral males", "toothy smile males", and "toothy smile females".  
 <p align="center">
-<img src="/images/sourceFaces.png" width="650" height="135">
+<img src="/images/sourceFaces.png" width="600" height="400">
+</p>
+
+The following screenshot shows the results of the calculated "neutral female" face:  "toothy smile male" - "toothy smale female" + "neutral male".  
+<p align="center">
+<img src="/images/AveragedFaces_4x.png" width="350" height="250">
 </p>
 
 <p align="center">
-<img src="/images/AveragedFaces_4x.png" width="650" height="135">
-</p>
-
-<p align="center">
-<img src="/images/neutralWoman.png" width="650" height="135">
+<img src="/images/neutralWoman.png" width="300" height="300">
 </p>
 
 ### 8.  other changes that can be applied?
