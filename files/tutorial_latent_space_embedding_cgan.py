@@ -39,7 +39,7 @@ if qErrorHide:
     log().setLevel('ERROR')
 
 #    INDICATE IF STARTING FRESH OR CONTINUING FROM PREVIOUS RUN
-qRestart = False
+qRestart = True
 if qRestart:
     epochs_done = 105
     epochs_goal = 115
